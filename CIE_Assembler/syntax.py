@@ -74,8 +74,8 @@ def LDD(args):
 
 def LDI(args):
     addrss = int(args["RAM"][(int(args["PC"],16)+1)%256],16)   #in denary
-    value = int(args["RAM"][addrss],16)         #in denary, the second address
-    args["ACC"] = denHex(value)     #in hex string
+    value = args["RAM"][addrss]         #in hex, the value
+    args["ACC"] = value                 #in hex string
     args["PC"] = denHex((int(args["PC"],16) + 2) % 256)    #in hex string
 
 def LDX(args):
@@ -197,17 +197,17 @@ HEXTOFUNCTIONDICT = {
 }
 
 if __name__ == "__main__":
-
+    """
     args = {
         "PC": "00",
-        "RAM": ["00","00","00","04","0B","00","00","00","00","00","00","00","00","00","00","00"],
+        "RAM": ["00","02","03","04","0B","00","00","00","00","00","00","00","00","00","00","00"],
         "ACC": "00",
         "IX": "01",
         "ZMP": False,
         "halt": False,
         "errorMsg": ""
     }
-
+    """
 
     #LDM(args)
     #LDD(args)
@@ -225,7 +225,7 @@ if __name__ == "__main__":
 
     #IN and OUT funcs left for testing
 
-
+    """
     print("PC", args["PC"])
     print("ACC", args["ACC"])
     print("ACC type", type(args["ACC"]))
@@ -234,3 +234,4 @@ if __name__ == "__main__":
     print(args["RAM"])
     print("MSG", args["errorMsg"])
     print("ZMP", args["ZMP"])
+    """
