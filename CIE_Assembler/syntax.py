@@ -74,7 +74,7 @@ def LDD(args):
 
 def LDI(args):
     addrss = int(args["RAM"][(int(args["PC"],16)+1)%256],16)   #in denary
-    value = args["RAM"][addrss]         #in hex, the value
+    value = args["RAM"][addrss]         #in hex str
     args["ACC"] = value                 #in hex string
     args["PC"] = denHex((int(args["PC"],16) + 2) % 256)    #in hex string
 
@@ -197,9 +197,9 @@ HEXTOFUNCTIONDICT = {
 }
 
 if __name__ == "__main__":
-    """
+
     args = {
-        "PC": "00",
+        "PC": "00", #addrss  #'03' is content of ldi
         "RAM": ["00","02","03","04","0B","00","00","00","00","00","00","00","00","00","00","00"],
         "ACC": "00",
         "IX": "01",
@@ -207,11 +207,11 @@ if __name__ == "__main__":
         "halt": False,
         "errorMsg": ""
     }
-    """
+
 
     #LDM(args)
     #LDD(args)
-    #LDI(args)
+    LDI(args)
     #LDX(args)
     #LDR(args)
     #STO(args)
@@ -225,7 +225,7 @@ if __name__ == "__main__":
 
     #IN and OUT funcs left for testing
 
-    """
+
     print("PC", args["PC"])
     print("ACC", args["ACC"])
     print("ACC type", type(args["ACC"]))
@@ -234,4 +234,3 @@ if __name__ == "__main__":
     print(args["RAM"])
     print("MSG", args["errorMsg"])
     print("ZMP", args["ZMP"])
-    """
