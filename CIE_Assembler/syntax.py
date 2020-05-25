@@ -74,7 +74,8 @@ def LDD(args):
 
 def LDI(args):
     addrss = int(args["RAM"][(int(args["PC"],16)+1)%256],16)   #in denary
-    value = args["RAM"][addrss]         #in hex str
+    secAddrss = int(args["RAM"][addrss],16)%256   #in denary
+    value = args["RAM"][secAddrss]         #in hex str
     args["ACC"] = value                 #in hex string
     args["PC"] = denHex((int(args["PC"],16) + 2) % 256)    #in hex string
 
