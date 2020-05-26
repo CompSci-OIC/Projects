@@ -28,14 +28,14 @@ class InterpreterControls:
     def assemble(self):
         parsed, data = self.getText()
         if parsed:
-            isValid, args, sym, errMsg = self.passed(parsed,data)
-            #isValid, args, sym, errMsg, hgTable = self.passed(parsed,data)
+            
+            isValid, args, sym, errMsg, hgTable = self.passed(parsed,data)
             self.update_sym(sym)
             if isValid:
                 args = copy.deepcopy(args)
                 self.reinitInterpreter(args)
-                self.updateArgs(args)
-                #self.updateArgs(args,hgTable)
+
+                self.updateArgs(args,hgTable)
                 self.runButton["state"] = "normal"
                 self.stepButton["state"] = "normal"
                 self.resetButton["state"] = "normal"

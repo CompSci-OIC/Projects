@@ -42,7 +42,7 @@ class Assembler: #Writing as a class so we can have a separate class for each as
         print(self.symbolTable)
         print(f"\nFunctional code flag status = {self.allOkFlag}")
         if not self.allOkFlag:
-            print(f"Error message = {self.errorMsg}")  
+            print(f"Error message = {self.errorMsg}")
 
     def labelCheck(self, label, definition):
         if definition: #Method was called from a label definition line

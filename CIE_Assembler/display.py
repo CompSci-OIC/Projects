@@ -118,9 +118,13 @@ class Display:
                 if val == "OPCODE":
                     self.hgList[i] = "light Blue"
                     self.remove_hg(i)
-                if val == "DB":
+                elif val == "DB":
                     self.hgList[i] = "orchid1"
                     self.remove_hg(i)
+                else:
+                    self.hgList[i] = "white"
+                    self.remove_hg(i)
+
         arggs = copy.deepcopy(args)
         self.remove_hg(int(self.registers["PC"],16))
         for reg in self.registers:
