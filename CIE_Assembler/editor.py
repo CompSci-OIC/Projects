@@ -164,17 +164,6 @@ class Editor:
         return ret, data
 
 
-        '''
-        for line in text:
-            ret.append(line.strip().split())
-        is_valid, linNo, msg = check_syntax(ret)
-        if not is_valid:
-            self.rep("Oopsie on line:" + str(linNo) + "|errorCode: " + msg)
-        else:
-            self.rep("No error: " + msg)
-
-        return ret
-        '''
 
     def syntax_analysis(self, tokens):
         opCodePos = -1
@@ -281,7 +270,7 @@ class Editor:
             for lineNum in range(self.endLineNo):
                 self.numLine.insert(END,lineNum+1)
             self.numLine.yview_moveto(currPos[0])
-        self.master.after(100,lambda: self.update_numLine(1))
+        self.master.after(50,lambda: self.update_numLine(1))
 
 
 
