@@ -115,8 +115,6 @@ class Assembler: #Writing as a class so we can have a separate class for each as
                 int(line[1]) #Checking to see if the operand is a label or an address
             except: #Operand is a label
                 self.args["RAM"][self.RAMpointer] = self.labelCheck(line[1], False)
-                print(self.args["RAM"][self.RAMpointer])
-                print(self.symbolTable)
             else: # JMP NUM case
                 self.args["RAM"][self.RAMpointer] = hex(int(line[1]))[2:].upper() #Operand must be a number if we reached this point
                 if len(self.args["RAM"][self.RAMpointer]) == 1: #Means we should add an extra 0 at the beginning
