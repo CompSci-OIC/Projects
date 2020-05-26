@@ -14,7 +14,7 @@ class Assembler: #Writing as a class so we can have a separate class for each as
         self.allOkFlag = True #By default it is true as we assume the code is ok.
         self.errorMsg = "" #Error message to be returned after passThrough is called
         self.code = []
-        self.args = { #Dictionary that holds all arguments needed
+        self.args = { #Dictionary that holds alxl arguments needed
             "PC": "00", #Program counter
             "RAM": [], #State of RAM
             "ACC": "00", #Accumulator
@@ -25,23 +25,24 @@ class Assembler: #Writing as a class so we can have a separate class for each as
             "errorMsg": "Execution successful", #Error message to be given out in the case of a flag. By default it is set to be successful.
             "stop": False #Flag for user stop
             }
+        self.highlightTokens = []
 
     def init_RAM(self): #Using a 256 byte RAM (16 by 16) in the form of a 2D list initialised to 00 in hex
         #Note: Agreed with Adi that he will have to adjust for rows by breaking into blocks of 16
         self.args["RAM"] = []
         for _ in range(0,256):
             self.args["RAM"].append("00") #Initialising each memory location to 00 in hex
+            self.highlightTokens.append("BLANK")
         return self.args["RAM"] #Return the initialised RAM list
 
     def showContents(self): #TEST FUNCTION TO BE CALLED FOR DEBUGGING PURPOSES
-
         print("Args to be passed to interpreter.py: ")
         print(self.args)
         print("\nSymbol Table: ")
         print(self.symbolTable)
         print(f"\nFunctional code flag status = {self.allOkFlag}")
         if not self.allOkFlag:
-            print(f"Error message = {self.errorMsg}")
+            print(f"Error message = {self.errorMsg}")  
 
     def labelCheck(self, label, definition):
         if definition: #Method was called from a label definition line
@@ -84,6 +85,7 @@ class Assembler: #Writing as a class so we can have a separate class for each as
 
     def regularOpcode(self, line): #Deals with adding OPCODE OPERAND (operand can be number, specialoperand or label)
         self.args["RAM"][self.RAMpointer] = syntax.OPCODETOHEXDICT[line[0]] # First part will always be an opcode
+        self.highlightTokens[self.RAMpointer] = "OPCODE"
         self.RAMpointer += 1
         #OPCODE SPECIALOPERAND case
         #Special operands are IX and ACC
@@ -124,15 +126,17 @@ class Assembler: #Writing as a class so we can have a separate class for each as
 
     def specialOpcode(self, line): #Deals with adding OPCODE lines to RAM
         self.args["RAM"][self.RAMpointer] = syntax.OPCODETOHEXDICT[line[0]]
+        self.highlightTokens[self.RAMpointer] = "OPCODE"
         self.RAMpointer += 1
 
-    def dataToRAM(self, data): #Adds data to RAM
+    def dataToRAM(self, data): #Adds raw data to RAM
         for line in data:
             address = int(line)
             string = hex(data[line])[2:].upper()
             if len(string) == 1: #Need to add extra 0
                 string = "0" + string
             self.args["RAM"][address] = string
+            self.highlightTokens[address] = "DB"
 
 
     def passThrough(self, tokenList, data): #Being passed a list of tokens for each line (FROM ADI)
@@ -163,7 +167,7 @@ class Assembler: #Writing as a class so we can have a separate class for each as
             elif len(line) == 1: #OPCODE
                 self.specialOpcode(line)
         self.errorMsg = self.checkErrors()
-        return self.allOkFlag, self.args, self.symbolTable, self.errorMsg
+        return self.allOkFlag, self.args, self.symbolTable, self.errorMsg, self.highlightTokens
 
     def checkErrors(self):
         # Errors possible:
@@ -191,5 +195,5 @@ if __name__ == "__main__": #Test input for finished functions
     }
     test.passThrough([["JMP", "LABEL"], ["LABEL", "END"], ["CMP", "#16"], ["JMP", "FAKELABEL"]], dataDict) #Running the assembler on this sample code
     test.showContents() #Debug function to see output
-
+    print(test.highlightTokens)
 #Consider bus width, might be useful to model?
