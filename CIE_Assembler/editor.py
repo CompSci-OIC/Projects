@@ -45,7 +45,7 @@ class Editor:
                                width = 3,
                                height= 25,
                                font = self.font,
-                               yscrollcommand =self.scrollBar.set
+                               yscrollcommand =self.scrollBar.set,
                                )
         self.numLine.pack(side = LEFT)
 
@@ -57,9 +57,11 @@ class Editor:
                             spacing1 =1
                             )
         self.textArea.pack(side=LEFT)
+        self.prev = 0
+        self.lineCount = 0
 
+        self.update_numLine(None)
 
-        self.textArea.bind("<Key>",self.update_numLine)
 
     def yview(self, *args):
         self.numLine.yview(*args)
@@ -162,17 +164,6 @@ class Editor:
         return ret, data
 
 
-        '''
-        for line in text:
-            ret.append(line.strip().split())
-        is_valid, linNo, msg = check_syntax(ret)
-        if not is_valid:
-            self.rep("Oopsie on line:" + str(linNo) + "|errorCode: " + msg)
-        else:
-            self.rep("No error: " + msg)
-
-        return ret
-        '''
 
     def syntax_analysis(self, tokens):
         opCodePos = -1
@@ -259,7 +250,7 @@ class Editor:
 
 
     def get_text(self):
-        text = self.textArea.get('0.0', 'end').strip()
+        text = self.textArea.get('0.0', 'end')
         return text
 
     def insert_text(self,text):
@@ -270,11 +261,16 @@ class Editor:
         print(text)
 
     def update_numLine(self,event):
-        self.endLineNo = int(self.textArea.index("end")[:len(self.textArea.index("end"))-2])-1
-        self.numLine.delete(0,END)
-        for lineNum in range(self.endLineNo):
-            self.numLine.insert(END,lineNum+1)
-
+        currPos = self.textArea.yview()
+        if currPos != self.prev or self.lineCount != self.get_text().count("\n"):
+            self.lineCount = self.get_text().count("\n")
+            self.prev = currPos
+            self.endLineNo = int(self.textArea.index("end")[:len(self.textArea.index("end"))-2])-1
+            self.numLine.delete(0,END)
+            for lineNum in range(self.endLineNo):
+                self.numLine.insert(END,lineNum+1)
+            self.numLine.yview_moveto(currPos[0])
+        self.master.after(50,lambda: self.update_numLine(1))
 
 
 
