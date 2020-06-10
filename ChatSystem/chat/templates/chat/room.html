@@ -24,7 +24,6 @@
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            window.alert(e.data)
             document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
         };
 
@@ -44,9 +43,8 @@
             const message = messageInputDom.value;
             const msg = JSON.stringify({
                 'message': message,
-                'name':name
+                'name': name
             });
-            window.alert(msg)
             chatSocket.send(msg);
             messageInputDom.value = '';
         };
