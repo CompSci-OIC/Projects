@@ -11,6 +11,7 @@
     <input id="chat-message-submit" type="button" value="Send">
     {{ room_name|json_script:"room-name" }}
     <script>
+        const name = Math.random();
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
         const chatSocket = new WebSocket(
@@ -23,7 +24,8 @@
 
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
-            document.querySelector('#chat-log').value += (data.message + '\n');
+            window.alert(e.data)
+            document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
         };
 
         chatSocket.onclose = function(e) {
@@ -40,9 +42,12 @@
         document.querySelector('#chat-message-submit').onclick = function(e) {
             const messageInputDom = document.querySelector('#chat-message-input');
             const message = messageInputDom.value;
-            chatSocket.send(JSON.stringify({
-                'message': message
-            }));
+            const msg = JSON.stringify({
+                'message': message,
+                'name':name
+            });
+            window.alert(msg)
+            chatSocket.send(msg);
             messageInputDom.value = '';
         };
     </script>
