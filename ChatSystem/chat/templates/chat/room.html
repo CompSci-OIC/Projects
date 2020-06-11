@@ -6,10 +6,38 @@
         <title>Chat Room</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
     </head>
-    <body>
+    <body id="pageBody">
         <div id="container">
-            <header>
-                <h1>Chat Room</h1>
+            <header id="head">
+                <h1 style="display:inline;">Chat Room</h1>
+                <div id="mode">
+                    <div class="item"><h4 id="lightMode" style="display:inline;">Light</h4></div>
+                    <div class="item">
+                        <label class="switch">
+                            <input type="checkbox" id="checkBox" onchange="toggleCheck()">
+                            <span class="slider round"></span>
+                        </label>
+                        <script>
+                        function toggleCheck() {
+
+                            if(document.getElementById("checkBox").checked){
+                                document.getElementById("pageBody").style.backgroundColor="#303030";
+                                document.getElementById("pageBody").style.color="white";
+                                document.getElementById("head").style.color="white";
+
+
+                            }
+                            else {
+                                document.getElementById("pageBody").style.backgroundColor="white";
+                                document.getElementById("pageBody").style.color="black";
+                                document.getElementById("head").style.color="black";
+                            }
+                        }
+                        </script>
+                    </div>
+                    <div class="item"><h4 id="darkMode" style="display:inline;">Dark</h4></div>
+
+                </div>
             </header>
             <div id="content">
                 <textarea id="chat-log" cols="100" rows="20"></textarea><br>
