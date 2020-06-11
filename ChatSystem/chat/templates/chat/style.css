@@ -97,6 +97,11 @@ input:checked + .slider:before {
 #pageBody{
     font-family: "Helvetica Neue";
     color: black;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
 #chat-log{
@@ -120,7 +125,7 @@ input:checked + .slider:before {
     height: 30px;
     width: 70px;
     margin-left: 750px;
-    
+
 
 }
 footer{
