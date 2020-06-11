@@ -17,13 +17,9 @@ body{
 #chat-log{
     border-radius: 15px;
     border: 2px solid black;
-
     height: 500px;
-
-
-
-
-
+    font-family:  "Helvetica Neue";
+    font-size: 15px;
 }
 #chat-message-input{
     font-size: 17px;
@@ -32,8 +28,6 @@ body{
     border: 2px solid black;
     width: 750px;
     height: 30px;
-
-
 }
 #chat-message-submit{
     font-size: 15px;
