@@ -5,6 +5,7 @@
         <meta charset="utf-8"/>
         <title>Chat Room</title>
         <link rel="stylesheet" href="style.css">
+        <!--
         <link rel="stylesheet" href="emojionearea.css">
         <script
         src="https://code.jquery.com/jquery-3.5.1.min.js"
@@ -12,6 +13,7 @@
         crossorigin="anonymous">
         </script>
         <script src="emojionearea.js"></script>
+        -->
     </head>
     <body id="pageBody">
         <div id="container">
@@ -52,6 +54,7 @@
             </div>
             <div class="item">
                 <input id="chat-message-input" type="text" placeholder="Type here" color="gray">
+                <!--
                 <script>
                     $(document).ready(function(){
                         $("#chat-message-input").emojioneArea({
@@ -59,12 +62,12 @@
                         });
                     })
                 </script>
+                -->
             </div>
-            <div id="thingy">
-                <div class="item">
-                    <input id="chat-message-submit" type="button" value="Send">
-                </div>
+            <div class="item">
+                <input id="chat-message-submit" type="button" value="Send">
             </div>
+
             <!{{ room_name|json_script:"room-name"}}>
             <script>
                 const name = Math.random();
