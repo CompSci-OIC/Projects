@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# docker run -p 6379:6379 -d redis:5
+# 
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
