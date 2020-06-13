@@ -18,7 +18,7 @@ def create_name(request,prev_url):#!!!!
 def group_selection(request):#!!!!
     # check if session started go to create_name page in case not
     # render the page
-    pass
+    return render(request, 'chat/select.html')
 
 def create_group(request):
     # check if session started go to create_name page in case not
@@ -27,7 +27,7 @@ def create_group(request):
     # render
 
 
-    pass
+    return render(request, 'chat/createGroup.html')
 
 def not_found(request):
     # display 404 not found
