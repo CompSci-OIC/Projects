@@ -1,8 +1,8 @@
 from django.db import models
 
 class CustomUser(models.Model):
-    name = models.charField(max_length = 200)
-    joined_group = models.charField(max_length = 5)
+    name = models.CharField(max_length = 200)
+    joined_group = models.CharField(max_length = 5)
 
 
 
@@ -11,7 +11,7 @@ class CustomUser(models.Model):
     pass
 
 class Group(models.Model):
-    group_name = models.charField(max_length = 50)
+    group_name = models.CharField(max_length = 50)
 
 
 
@@ -19,9 +19,9 @@ class Group(models.Model):
 
 
 class Message(models.Model):
-    group = models.ForeignKey(Question, on_delete = models.CASCADE)
+    group = models.ForeignKey(Group, on_delete = models.CASCADE)
     text = models.TextField()
-    author = models.CharField(max_lenght = 50)
+    author = models.CharField(max_length = 50)
     #time_stamp = models.TimeField()
 
 
