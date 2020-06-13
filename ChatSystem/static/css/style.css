@@ -146,3 +146,61 @@ footer{
     bottom: 0
 
 }
+
+
+.setup /* Layout for all setup pages (index, select, createGroup)*/
+{
+    font-family: "Helvetica Neue";
+    display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;     /* center items horizontally, in this case */
+    height: 800px;
+    text-align: center;
+    margin: 5px;
+}
+
+#namesetupHeading
+{
+     font-size: xx-large;
+     text-align: center;
+}
+
+#nameForm
+{
+    height: 40px;
+    width: 512px;
+    font-size: x-large;
+}
+
+#nameButton
+{
+    margin-left: -80px;
+    width: 80px;
+    height: 46px;
+    font-size: x-large;
+
+}
+
+#groupsetupHeading
+{
+    font-size: x-large;
+    text-align: left;
+    margin-left: 20px;
+}
+
+#groupsetupForm
+{
+    margin-left: 20px;
+    height: 40px;
+    width: 256px;
+    font-size: x-large;
+}
+
+#groupsetupButton
+{
+    margin-left: -1px;
+    width: 100px;
+    height: 46px;
+    font-size: x-large;
+}
