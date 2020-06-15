@@ -29,7 +29,7 @@
                         <div id="groupID"><h2>groupID</h2></div>
                     </div>
                     <div class="theButton">
-                        <input class="LeaveGroupButt" type="button" value="Leave Group">
+                        <input id="leaveGroupButt" type="button" value="Leave Group">
                     </div>
                 </div>
             </div>
@@ -54,6 +54,10 @@
                                     document.getElementById("userList").style.color="white";
                                     document.getElementById("chat-log").style.backgroundColor="#101010";
                                     document.getElementById("chat-log").style.borderColor="#CCC";
+                                    document.getElementById("leaveGroupButt").style.backgroundColor="#090909";
+                                    document.getElementById("leaveGroupButt").style.color="white";
+                                    document.getElementById("leaveGroupButt").style.borderColor="#CCC";
+                                    document.getElementById("chat-message-input").style.backgroundColor="#CCC"
 
                                 }
                                 else{
@@ -62,8 +66,11 @@
                                     document.getElementById("head1").style.color="black";
                                     document.getElementById("head2").style.color="black";
                                     document.getElementById("userList").style.color="black";
-                                    document.getElementById("chat-log").style.backgroundColor="white";
-
+                                    document.getElementById("chat-log").style.backgroundColor="#F0F0F0";
+                                    document.getElementById("chat-log").style.borderColor="black";
+                                    document.getElementById("leaveGroupButt").style.color="black";
+                                    document.getElementById("leaveGroupButt").style.backgroundColor="white";
+                                    document.getElementById("chat-message-input").style.backgroundColor="white"
 
                                 }
                             }
@@ -135,8 +142,8 @@
                         chatSocket.send(msg);
                         messageInputDom.value = '';
                     };
-                    document.querySelector('#LeaveGroupButt').onclick = function(e) {
-
+                    document.querySelector('#leaveGroupButt').onclick = function(e) {
+                        return 0;
                     };
                 </script>
                 <!--

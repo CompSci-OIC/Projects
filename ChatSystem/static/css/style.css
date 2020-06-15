@@ -111,6 +111,7 @@ body{
 #chat-log{
     padding: 10px;
     border-radius: 15px;
+    background-color: #F0F0F0;
     border: 2px solid black;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
@@ -156,7 +157,7 @@ footer{
     position: relative;
     font-size: 20px;
     border-radius: 50%;
-    border: 0;
+    border: 1;
     height: 53px;
     width: 53px;
     margin-left: 13px;
@@ -168,7 +169,7 @@ footer{
     position: relative;
     font-size: 20px;
     border-radius: 50%;
-    border: 0;
+    border: 1;
     height: 53px;
     width: 53px;
     margin-left: 13px;
@@ -206,8 +207,6 @@ footer{
 
 #userList{
     flex: 90%;
-
-
 }
 
 #groupID{
@@ -222,7 +221,7 @@ footer{
     border: 2px;
 }
 
-.LeaveGroupButt{
+#leaveGroupButt{
     font-size: 25px;
     border-radius: 15px;
     border: 1;
@@ -238,8 +237,6 @@ footer{
     flex: 75%;
 
 }
-
-
 
 
 .setup /* Layout for all setup pages (index, select, createGroup)*/
