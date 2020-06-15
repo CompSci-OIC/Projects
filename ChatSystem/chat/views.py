@@ -1,5 +1,5 @@
 # chat/views.py
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .forms import NameForm
 
@@ -7,7 +7,9 @@ def index(request):
     # has to create an instance of an group class
     if request.method == 'POST':
         form = NameForm(request.POST)
-        print(form.your_name)
+        if form.is_valid():
+            print(form.cleaned_data['your_name'])
+        return redirect('group_selection')
     else:
         form = NameForm()
     return render(request, 'chat/index.html',{
@@ -27,6 +29,7 @@ def create_name(request,prev_url):#!!!!
 def group_selection(request):#!!!!
     # check if session started go to create_name page in case not
     # render the page
+    print("hello")
     return render(request, 'chat/select.html', {
         'username': "Adi"
     })
