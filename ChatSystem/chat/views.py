@@ -27,7 +27,9 @@ def create_group(request):
     # render
 
 
-    return render(request, 'chat/createGroup.html')
+    return render(request, 'chat/createGroup.html', {
+            'username': "Adi"
+    })
 
 def not_found(request):
     # display 404 not found
