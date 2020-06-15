@@ -74,7 +74,7 @@ header{
 }
 
 input:checked + .slider {
-    background-color: black;
+    background-color: #161616;
 }
 
 input:focus + .slider {
