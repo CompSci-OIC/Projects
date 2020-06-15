@@ -116,7 +116,7 @@ body{
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
     display:block;/*reset from inline*/
-    width: 100%;
+    width: 1223px;
     height: 745px;
     margin:0;/*remove defaults*/
     font-family:  "Helvetica Neue";
@@ -130,8 +130,8 @@ body{
 
 footer{
     clear: both;
-    position: absolute;
-    bottom: 17px;
+    position: relative;
+
 }
 
 #chat-message-input{
@@ -141,8 +141,8 @@ footer{
     padding: 5px;
     border-radius: 13px;
     border: 2px solid black;
-    width: 1142px;
-    height: 42px;
+    width: 1140px;
+    height: 41px;
 }
 
 .sendButtonBlack{
@@ -172,7 +172,7 @@ footer{
 .container{
     display: flex;
     font-family: "Helvetica Neue";
-
+    width: 100%;
 }
 
 .info-area{
