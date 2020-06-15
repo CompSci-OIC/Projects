@@ -1,7 +1,6 @@
 *:focus {outline:none !important} /*disable html element highlight*/
 
 header{
-
     display: flex;
     align-items: center;
     height: 70px;
@@ -15,7 +14,7 @@ header{
     padding-bottom: 0px;
     display: flex;
     align-items: center;
-    margin-left: 800px;
+    margin-left: 788px;
 }
 
 .item{
@@ -38,7 +37,7 @@ header{
     left: 1px;
     width:  45px;
     height: 20px;
-    border: 1px solid white;
+    border: 1px solid #CCC;
     border-radius: 20px;
 
 }
@@ -100,6 +99,7 @@ input:checked + .slider:before {
 
 body{
     font-family: "Helvetica Neue";
+    padding-right: 17px;
     color: black;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
@@ -137,11 +137,11 @@ footer{
 #chat-message-input{
     display: inline-block;
     vertical-align: middle;
-    font-size: 18px;
+    font-size: 20px;
     padding: 5px;
     border-radius: 13px;
     border: 2px solid black;
-    width: 1120px;
+    width: 1142px;
     height: 42px;
 }
 /*
@@ -153,14 +153,25 @@ footer{
 #sendButton{
     display: inline-block;
     position: relative;
-    font-size: 15px;
-    border-radius: 15px;
-    border: 1;
-    height: 40px;
-    width: 90px;
+    font-size: 20px;
+    border-radius: 50%;
+    border: 0;
+    height: 53px;
+    width: 53px;
     margin-left: 13px;
+    background: url("../../../static/image/blackPaperplane.png");
+}
 
-
+.sendButtonWhite{
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    border-radius: 50%;
+    border: 0;
+    height: 53px;
+    width: 53px;
+    margin-left: 13px;
+    background: url("../../../static/image/whitePaperplane.png");
 }
 
 .container{
@@ -180,7 +191,7 @@ footer{
 }
 
 
-.the-rest-of-info-area{
+.button-else{
     flex: 90%;
     display: flex;
     flex-direction: column;
