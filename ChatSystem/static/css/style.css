@@ -266,6 +266,8 @@ footer{
     position: absolute;
     top: 20px;
     left: 20px;
+    border-radius: 15px;
+    border: 1;
 }
 
 #namesetupHeading
@@ -276,17 +278,22 @@ footer{
 
 #nameForm
 {
-    height: 40px;
+    height: 33px;
     width: 512px;
     font-size: x-large;
+    padding: 5px;
+    border-radius: 13px;
+    border: 2px solid black;
 }
 
 #nameButton
 {
-    margin-left: -80px;
+    margin-left: 10px;
     width: 80px;
     height: 46px;
     font-size: x-large;
+    border-radius: 15px;
+    border: 1;
 
 }
 
@@ -300,15 +307,20 @@ footer{
 #groupsetupForm
 {
     margin-left: 20px;
-    height: 40px;
+    height: 36px;
     width: 256px;
     font-size: x-large;
+    padding: 5px;
+    border-radius: 13px;
+    border: 2px solid black;
 }
 
 #groupsetupButton
 {
     margin-left: -1px;
     width: 100px;
-    height: 46px;
+    height: 44px;
     font-size: x-large;
+    border-radius: 15px;
+    border: 1;
 }
