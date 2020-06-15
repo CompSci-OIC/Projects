@@ -1,7 +1,7 @@
 *:focus {outline:none !important} /*disable html element highlight*/
 
 header{
-    padding-left: 5px;
+
     display: flex;
     align-items: center;
     height: 70px;
@@ -15,7 +15,7 @@ header{
     padding-bottom: 0px;
     display: flex;
     align-items: center;
-    margin-left: 807px;
+    margin-left: 800px;
 }
 
 .item{
@@ -34,8 +34,12 @@ header{
 .switch{
     position: relative;
     display: inline-block;
-    width: 43px;
-    height: 23px;
+    top: 5px;
+    left: 1px;
+    width:  45px;
+    height: 20px;
+    border: 1px solid white;
+    border-radius: 20px;
 
 }
 
@@ -60,10 +64,11 @@ header{
 .slider:before {
     position: absolute;
     content: "";
-    height: 19px;
-    width: 20px;
-    left: 1px;
-    bottom: 2px;
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    right: 2px;
+    bottom: 1px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -78,9 +83,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(21px);
-    -ms-transform: translateX(21px);
-    transform: translateX(21px);
+    -webkit-transform: translateX(23px);
+    -ms-transform: translateX(23px);
+    transform: translateX(23px);
 }
 
 /* Rounded sliders */
@@ -116,8 +121,11 @@ body{
     margin:0;/*remove defaults*/
     font-family:  "Helvetica Neue";
     font-size: 15px;
-    overflow-y:auto;/*resets IE*/
-    overflow-x:hidden;/*resets IE*/
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
 }
 
 footer{
@@ -174,15 +182,25 @@ footer{
 
 .the-rest-of-info-area{
     flex: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 14px;
+
     height: 836px;
+    border: 2px;
 
 
 }
 
 #userList{
-    display: flex;
-    flex-direction: column;
-    border: 3px;
+    flex: 90%;
+
+
+}
+
+#groupID{
+    flex: 10%;
+    margin-bottom: 0;
 
 }
 
