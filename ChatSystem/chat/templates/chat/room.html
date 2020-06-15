@@ -93,7 +93,7 @@
                         <input id="sendButton" type="button" value="Send">
                     </div>
                 </footer>
-                <!{{ room_name|json_script:"room-name"}}>
+                {{ room_name|json_script:"room-name"}}
                 <script>
                     const name = Math.random();
                     const roomName = JSON.parse(document.getElementById('room-name').textContent);
