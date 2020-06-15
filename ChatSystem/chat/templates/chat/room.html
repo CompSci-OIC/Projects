@@ -17,102 +17,129 @@
         -->
     </head>
     <body id="pageBody">
-        <div id="container">
-            <header id="head">
-                <h1 style="display:inline;">Chat Room</h1>
-                <div id="mode">
-                    <div class="item"><h4 id="lightMode" style="display:inline;">Light</h4></div>
-                    <div class="item">
-                        <label class="switch">
-                            <input type="checkbox" id="checkBox" onchange="toggleCheck()">
-                            <span class="slider round"></span>
-                        </label>
-                        <script>
-                        function toggleCheck() {
+        <div class="container">
+            <div class="info-area">
+                <div class="sub-container">
+                    <div class="the-rest-of-info-area">
+                        <header id="head1"><h1>Participants</h1></header>
+                        <div id=#userList>
+                            <h2>fuckoff</h2>
 
-                            if(document.getElementById("checkBox").checked){
-                                document.getElementById("pageBody").style.backgroundColor="#303030";
-                                document.getElementById("pageBody").style.color="white";
-                                document.getElementById("head").style.color="white";
-
-
-                            }
-                            else {
-                                document.getElementById("pageBody").style.backgroundColor="white";
-                                document.getElementById("pageBody").style.color="black";
-                                document.getElementById("head").style.color="black";
-                            }
-                        }
-                        </script>
+                        </div>
+                        <div id="groupID"></div>
                     </div>
-                    <div class="item"><h4 id="darkMode" style="display:inline;">Dark</h4></div>
+                    <div class="theButton">
+                        <input class="LeaveGroupButt" type="button" value="Leave Group">
+                    </div>
+                </div>
+            </div>
+            <div class="chat-area">
+                <header id="head2">
+                    <h1 style="display:inline;">Chat Room</h1>
+                    <div id="mode">
+                        <div class="item"><h4 id="lightMode" style="display:inline;">Light</h4></div>
+                        <div class="item">
+                            <label class="switch">
+                                <input type="checkbox" id="checkBox" onchange="toggleCheck()">
+                                <span class="slider round"></span>
+                            </label>
+                            <script>
+                            function toggleCheck() {
+
+                                if(document.getElementById("checkBox").checked){
+                                    document.getElementById("pageBody").style.backgroundColor="#303030";
+                                    document.getElementById("pageBody").style.color="white";
+                                    document.getElementById("head1").style.color="white";
+                                    document.getElementById("head2").style.color="white";
+                                    document.getElementById("userList").style.color="white";
+
+
+                                }
+                                else {
+                                    document.getElementById("pageBody").style.backgroundColor="white";
+                                    document.getElementById("pageBody").style.color="black";
+                                    document.getElementById("head1").style.color="black";
+                                    document.getElementById("head2").style.color="black";
+                                    document.getElementById("userList").style.color="black";
+                                }
+                            }
+                            </script>
+                        </div>
+                        <div class="item"><h4 id="darkMode" style="display:inline;">Dark</h4></div>
+
+                    </div>
+                </header>
+                <div>
+                    <textarea id="chat-log" cols="100" rows="20" ></textarea><br>
 
                 </div>
-            </header>
-            <div>
-                <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+                <footer>
+                    <div class="item">
+                        <input id="chat-message-input" type="text" placeholder="Type here" color="gray">
+                        <!--
+                        <script>
+                            $(document).ready(function(){
+                                $("#chat-message-input").emojioneArea({
+                                    pickerPosition: "bottom"
+                                });
+                            })
+                        </script>
+                        -->
+                    </div>
 
-            </div>
-            <div class="item">
-                <input id="chat-message-input" type="text" placeholder="Type here" color="gray">
-                <!--
+                    <div class="item">
+                        <input id="sendButton" type="button" value="Send">
+                    </div>
+                </footer>
+                <!{{ room_name|json_script:"room-name"}}>
                 <script>
-                    $(document).ready(function(){
-                        $("#chat-message-input").emojioneArea({
-                            pickerPosition: "bottom"
+                    const name = Math.random();
+                    const roomName = JSON.parse(document.getElementById('room-name').textContent);
+
+                    const chatSocket = new WebSocket(
+                        'ws://'
+                        + window.location.host
+                        + '/ws/chat/'
+                        + roomName
+                        + '/'
+                    );
+
+                    chatSocket.onmessage = function(e) {
+                        const data = JSON.parse(e.data);
+                        document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
+                    };
+
+                    chatSocket.onclose = function(e) {
+                        console.error('Chat socket closed unexpectedly');
+                    };
+
+                    document.querySelector('#chat-message-input').focus();
+                    document.querySelector('#chat-message-input').onkeyup = function(e) {
+                        if (e.keyCode === 13) {  // enter, return
+                            document.querySelector('#sendButton').click();
+                        }
+                    };
+
+                    document.querySelector('#sendButton').onclick = function(e) {
+                        const messageInputDom = document.querySelector('#chat-message-input');
+                        const message = messageInputDom.value;
+                        const msg = JSON.stringify({
+                            'message': message,
+                            'name': name
                         });
-                    })
+                        chatSocket.send(msg);
+                        messageInputDom.value = '';
+                    };
+                    document.querySelector('#LeaveGroupButt').onclick = function(e) {
+
+                    };
                 </script>
+                <!--
+                <footer>
+                    <h4>By OIC CompSci Gang &copy</h4>
+                </footer>
                 -->
             </div>
-            <div class="item">
-                <input id="chat-message-submit" type="button" value="Send">
-            </div>
-
-            {{ room_name|json_script:"room-name"}}
-            <script>
-                const name = Math.random();
-                const roomName = JSON.parse(document.getElementById('room-name').textContent);
-
-                const chatSocket = new WebSocket(
-                    'ws://'
-                    + window.location.host
-                    + '/ws/chat/'
-                    + roomName
-                    + '/'
-                );
-
-                chatSocket.onmessage = function(e) {
-                    const data = JSON.parse(e.data);
-                    document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
-                };
-
-                chatSocket.onclose = function(e) {
-                    console.error('Chat socket closed unexpectedly');
-                };
-
-                document.querySelector('#chat-message-input').focus();
-                document.querySelector('#chat-message-input').onkeyup = function(e) {
-                    if (e.keyCode === 13) {  // enter, return
-                        document.querySelector('#chat-message-submit').click();
-                    }
-                };
-
-                document.querySelector('#chat-message-submit').onclick = function(e) {
-                    const messageInputDom = document.querySelector('#chat-message-input');
-                    const message = messageInputDom.value;
-                    const msg = JSON.stringify({
-                        'message': message,
-                        'name': name
-                    });
-                    chatSocket.send(msg);
-                    messageInputDom.value = '';
-                };
-            </script>
-
-            <footer>
-                <h4>By OIC CompSci Gang &copy</h4>
-            </footer>
         </div>
     </body>
 </html>
