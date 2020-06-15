@@ -13,7 +13,9 @@
         </div>
         <div class = form>
             <center>
-            <form action = "select">
+            <form action = "select" method = "post">
+              {% csrf_token %}
+              {{ nameForm }}
                 <input type = "text" placeholder = "Enter name here" id = "nameForm"> <input id = "nameButton" type = "submit" value = "Enter">
             </form>
             </center>

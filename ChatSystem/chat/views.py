@@ -1,9 +1,18 @@
 # chat/views.py
 from django.shortcuts import render
 
+from .forms import NameForm
+
 def index(request):
     # has to create an instance of an group class
-    return render(request, 'chat/index.html')
+    if request.method == 'POST':
+        form = NameForm(request.POST)
+        print(form.your_name)
+    else:
+        form = NameForm()
+    return render(request, 'chat/index.html',{
+        'nameForm': form
+    })
 
 def create_name(request,prev_url):#!!!!
     # check if session has started and delete it if yes
