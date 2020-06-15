@@ -150,7 +150,8 @@ footer{
     vertical-align: middle;
 }
 */
-#sendButton{
+
+.sendButtonBlack{
     display: inline-block;
     position: relative;
     font-size: 20px;
@@ -159,7 +160,7 @@ footer{
     height: 53px;
     width: 53px;
     margin-left: 13px;
-    background: url("../../../static/image/blackPaperplane.png");
+    background: url("../image/blackPaperplane.png");
 }
 
 .sendButtonWhite{
@@ -171,7 +172,7 @@ footer{
     height: 53px;
     width: 53px;
     margin-left: 13px;
-    background: url("../../../static/image/whitePaperplane.png");
+    background: url("../image/whitePaperplane.png");
 }
 
 .container{
