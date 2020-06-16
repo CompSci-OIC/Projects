@@ -74,7 +74,7 @@ header{
 }
 
 input:checked + .slider {
-    background-color: black;
+    background-color: #161616;
 }
 
 input:focus + .slider {
@@ -116,8 +116,8 @@ body{
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
     display:block;/*reset from inline*/
-    width: 100%;
-    height: 745px;
+    width: 1223px;
+    height: 742px;
     margin:0;/*remove defaults*/
     font-family:  "Helvetica Neue";
     font-size: 15px;
@@ -130,26 +130,20 @@ body{
 
 footer{
     clear: both;
-    position: absolute;
-    bottom: 17px;
+    position: relative;
+
 }
 
 #chat-message-input{
     display: inline-block;
     vertical-align: middle;
     font-size: 20px;
-    padding: 5px;
+    padding-left: 7px;
     border-radius: 13px;
     border: 2px solid black;
-    width: 1142px;
-    height: 42px;
+    width: 1140px;
+    height: 41px;
 }
-/*
-#thingy{
-    display: inline-block;
-    vertical-align: middle;
-}
-*/
 
 .sendButtonBlack{
     display: inline-block;
@@ -178,7 +172,7 @@ footer{
 .container{
     display: flex;
     font-family: "Helvetica Neue";
-
+    width: 100%;
 }
 
 .info-area{
@@ -197,11 +191,8 @@ footer{
     display: flex;
     flex-direction: column;
     margin-left: 14px;
-
     height: 836px;
     border: 2px;
-
-
 }
 
 #userList{
@@ -211,7 +202,6 @@ footer{
 #groupID{
     flex: 10%;
     margin-bottom: 0;
-
 }
 
 .theButton{
@@ -221,15 +211,24 @@ footer{
 }
 
 #leaveGroupButt{
-    font-size: 25px;
+    font-size: 24px;
+    background-color: white;
     border-radius: 15px;
     border: 1;
-    height: 53px;
+    height: 39px;
     width: 95%;
     margin-left: 13px;
-
+    margin-top: 5px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
+.leaveGP:hover{
+    filter: invert(100%);
+}
 
 .chat-area{
     padding-left: 13px;
