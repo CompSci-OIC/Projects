@@ -29,7 +29,6 @@ def create_name(request,prev_url):#!!!!
 def group_selection(request):#!!!!
     # check if session started go to create_name page in case not
     # render the page
-    print("hello")
     return render(request, 'chat/select.html', {
         'username': "Adi"
     })
