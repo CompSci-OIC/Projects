@@ -10,7 +10,7 @@ class CustomUser(models.Model):
 
     pass
 
-class Group(models.Model):
+class CustomGroup(models.Model):
     group_name = models.CharField(max_length = 50)
 
 
@@ -19,7 +19,7 @@ class Group(models.Model):
 
 
 class Message(models.Model):
-    group = models.ForeignKey(Group, on_delete = models.CASCADE)
+    group = models.ForeignKey(CustomGroup, on_delete = models.CASCADE)
     text = models.TextField()
     author = models.CharField(max_length = 50)
     #time_stamp = models.TimeField()
