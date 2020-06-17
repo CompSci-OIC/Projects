@@ -18,9 +18,10 @@
         </div>
 
         <div id = "groupsetupHeading" style="text-align: center;">
-        <form action = "../room/123">
+        <form  method ="post" >
             <h1 style="display: inline; margin: 0;"> Group name:
-            <input type = "text" style="width: 512px;" placeholder = "Enter group name" id = "groupsetupForm">
+            {% csrf_token %}
+            {{ groupForm }}
             </h1>
         </div>
 

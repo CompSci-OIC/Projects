@@ -1,7 +1,7 @@
 # chat/views.py
 from django.shortcuts import render, redirect
 
-from .forms import NameForm
+from .forms import NameForm , GroupForm
 from .models import CustomGroup
 
 
@@ -41,17 +41,27 @@ def group_selection(request):#!!!!
     })
 
 def create_group(request):
-    # check if session started go to create_name page in case not
     # generate the id and create an instance of the group
     # create group button should set joined_group parameter of a user to the created group
     if not('username' in request.session):
         return redirect('index')
+    if request.method == 'POST':
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['group_name']
+            print(name)
+            groupInfo = CustomGroup(group_name = name)
+            groupInfo.save()
+    if request.method == 'GET':
+        form = GroupForm()
 
     # create custom group instance
     # instance.save()
 
     return render(request, 'chat/createGroup.html', {
-            'username': request.session['username']
+            'username': request.session['username'],
+            'groupForm': form
+
     })
 
 def not_found(request):

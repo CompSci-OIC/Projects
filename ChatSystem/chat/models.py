@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 class CustomUser(models.Model):
     name = models.CharField(max_length = 200)
@@ -12,8 +13,6 @@ class CustomUser(models.Model):
 
 class CustomGroup(models.Model):
     group_name = models.CharField(max_length = 50)
-
-
 
     pass
 
