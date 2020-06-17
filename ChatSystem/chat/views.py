@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 
 from .forms import NameForm , GroupForm, JoinGroupForm
-from .models import CustomGroup
+from .models import CustomGroup, CustomUser
 
 
 def index(request):
@@ -11,9 +11,10 @@ def index(request):
         form = NameForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['your_name']
-            request.session['username'] = name
+            request.session['userId'] = name
             return redirect('group_selection')
     if request.method == 'GET':
+
         request.session.flush()
         form = NameForm()
     return render(request, 'chat/index.html',{
@@ -42,7 +43,7 @@ def group_selection(request):#!!!!
 
 
     form = JoinGroupForm()
-    if not('username' in request.session):
+    if not('userId' in request.session):
         return redirect('index')
 
     if request.method == 'POST':
@@ -63,7 +64,7 @@ def group_selection(request):#!!!!
                 return redirect('.')
 
     return render(request, 'chat/select.html', {
-        'username': request.session['username'],
+        'username': request.session['userId'],
         'groupForm': form,
         'errorFlag': errorFlag
     })
@@ -78,7 +79,7 @@ def create_group(request):
         group.save()
         request.session['group_id'] = group.id
 
-    if not('username' in request.session):
+    if not('userId' in request.session):
         return redirect('index')
     if request.method == 'POST':
         form = GroupForm(request.POST)

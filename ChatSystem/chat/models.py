@@ -3,7 +3,6 @@ from django import forms
 
 class CustomUser(models.Model):
     name = models.CharField(max_length = 200)
-    joined_group = models.CharField(max_length = 5)
 
 
 
