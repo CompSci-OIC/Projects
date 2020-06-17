@@ -205,8 +205,9 @@ footer{
     border: 2px;
 }
 
-#userList{
+.userList{
     flex: 90%;
+    overflow: scroll;
 }
 
 #groupID{
