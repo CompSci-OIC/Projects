@@ -55,6 +55,7 @@
                             function toggleCheck() {
                                 document.getElementById("sendButton").classList.toggle("sendButtonWhite")
                                 if(document.getElementById("checkBox").checked){
+                                    document.getElementById("groupID").style.color="white";
                                     document.getElementById("leaveGroupButt").style.backgroundColor="#090909";
                                     document.getElementById("leaveGroupButt").style.color="white";
                                     document.getElementById("chat-log").style.borderColor="#CCC";
@@ -64,19 +65,20 @@
                                     document.getElementById("head1").style.color="white";
                                     document.getElementById("head2").style.color="white";
                                     document.getElementById("userList").style.color="white";
-                                    document.getElementById("groupID").style.color="white";
+
                                 }
                                 else{
+                                    document.getElementById("groupID").style.color="black";
                                     document.getElementById("chat-log").style.backgroundColor="#F0F0F0";
+                                    document.getElementById("chat-log").style.borderColor="black";
                                     document.getElementById("pageBody").style.backgroundColor="white";
+                                    document.getElementById("leaveGroupButt").style.color="black";
+                                    document.getElementById("leaveGroupButt").style.backgroundColor="white";
                                     document.getElementById("pageBody").style.color="black";
                                     document.getElementById("head1").style.color="black";
                                     document.getElementById("head2").style.color="black";
                                     document.getElementById("userList").style.color="black";
-                                    document.getElementById("groupID").style.color="black";
-                                    document.getElementById("chat-log").style.borderColor="black";
-                                    document.getElementById("leaveGroupButt").style.color="black";
-                                    document.getElementById("leaveGroupButt").style.backgroundColor="white";
+
 
 
                                 }
@@ -89,7 +91,7 @@
                     </div>
                 </header>
                 <div>
-                    <textarea id="chat-log" cols="100" rows="20" ></textarea><br>
+                    <textarea disabled id="chat-log" cols="100" rows="20" ></textarea><br>
 
                 </div>
                 <footer>
