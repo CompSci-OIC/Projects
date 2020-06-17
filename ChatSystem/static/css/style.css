@@ -264,6 +264,12 @@ footer{
     height: 800px;
     text-align: center;
     margin: 5px;
+
+}
+
+#errorBody{
+    color: white;
+    background: url("../image/spaceDark.png");
 }
 
 #nameDisplay
