@@ -19,8 +19,10 @@
 
         <div class = heading id = "groupsetupHeading">
             <h1 style="text-align: center;">Join existing group
-        <form action = "../room/123">
-            <input type = "text" placeholder = "Enter group ID" id = "groupsetupForm">
+        <form method = 'post'>
+            {% csrf_token %}
+            {{ groupForm }}
+            <!--<input type = "text" placeholder = "Enter group ID" id = "groupsetupForm">-->
             <input type = "submit" class="buttAnimation" id = "groupsetupButton" value = "Join">
         </form>
         </h1>
