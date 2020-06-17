@@ -118,10 +118,10 @@ def room(request, room_id):
     userString = ""
     group = CustomGroup.objects.get(id = room_id)
     for id in group.get_users():
-        userString += id + '\n'
+        userString += id + "\n"
 
     return render(request, 'chat/room.html', {
         'room_id': group.id,
         'room_name': group.group_name,
-        'Participants': userString
+        'Participants': group.get_users()
     })
