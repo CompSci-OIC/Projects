@@ -14,6 +14,7 @@ class GroupForm(forms.Form):
         'type':"text",
         'placeholder': "Enter Group Name",
         'id':'groupsetupForm'}))
+    
 
 
 

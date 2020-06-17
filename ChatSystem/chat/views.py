@@ -33,7 +33,14 @@ def create_name(request):#!!!!
 def group_selection(request):#!!!!
     # check if session started go to create_name page in case not
     # render the page
-    errorFlag = False
+    errorFlag = 0
+    if 'errorFlag' in request.session:
+        if request.session['errorFlag'] == 1:
+            request.session['errorFlag'] = 0
+            errorFlag = 1
+
+
+
     form = JoinGroupForm()
     if not('username' in request.session):
         return redirect('index')
@@ -47,10 +54,13 @@ def group_selection(request):#!!!!
                 if CustomGroup.objects.filter(id = int(groupId)).exists():
                     return redirect('../room/' + groupId)
                 else:
-                    errorFlag = True
+                    errorFlag = 1
+                    request.session['errorFlag'] = 1
+                    return redirect('.')
             else:
-                errorFlag = True
-
+                errorFlag = 1
+                request.session['errorFlag'] = 1
+                return redirect('.')
 
     return render(request, 'chat/select.html', {
         'username': request.session['username'],
@@ -61,16 +71,26 @@ def group_selection(request):#!!!!
 def create_group(request):
     # generate the id and create an instance of the group
     # create group button should set joined_group parameter of a user to the created group
+    if 'group_id' in request.session:
+        group = CustomGroup.objects.get(id = request.session['group_id'])
+    else:
+        group = CustomGroup()
+        group.save()
+        request.session['group_id'] = group.id
+
     if not('username' in request.session):
         return redirect('index')
     if request.method == 'POST':
         form = GroupForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['group_name']
-            print(name)
-            groupInfo = CustomGroup(group_name = name)
-            groupInfo.save()
-            return redirect('../room/' + str(groupInfo.id))
+            request.session.pop('group_id')
+            group.group_name = name
+            group.save()
+            group.add_user(12)
+            print(group.user_count())
+
+            return redirect('../room/' + str(group.id))
     if request.method == 'GET':
         form = GroupForm()
 
@@ -79,7 +99,8 @@ def create_group(request):
 
     return render(request, 'chat/createGroup.html', {
             'username': request.session['username'],
-            'groupForm': form
+            'groupForm': form,
+            'group_id': group.id
 
     })
 
@@ -89,13 +110,15 @@ def not_found(request):
 
     pass
 
-def room(request, room_name):
+def room(request, room_id):
     # check if session started go to create_name page in case not
     # check if group exists, if not group selection screen
     # check if user is in the group if not add him
     # render
+    group = CustomGroup.objects.get(id = room_id)
 
 
     return render(request, 'chat/room.html', {
-        'room_name': room_name
+        'room_id': group.id,
+        'room_name': group.group_name
     })
