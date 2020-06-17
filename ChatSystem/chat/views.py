@@ -33,13 +33,13 @@ def create_name(request):#!!!!
 def group_selection(request):#!!!!
     # check if session started go to create_name page in case not
     # render the page
+    errorFlag = False
     form = JoinGroupForm()
     if not('username' in request.session):
         return redirect('index')
 
     if request.method == 'POST':
         form = JoinGroupForm(request.POST)
-        errorFlag = False
         if form.is_valid():
 
             groupId = form.cleaned_data['group_id']
