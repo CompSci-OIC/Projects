@@ -14,7 +14,7 @@ header{
     padding-bottom: 0px;
     display: flex;
     align-items: center;
-    margin-left: 788px;
+    margin-left: 786px;    /*so that "Chat Room" header donesn't split when page is scaled*/
 }
 
 .item{
@@ -98,6 +98,11 @@ input:checked + .slider:before {
 
 
 body{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
     font-family: "Helvetica Neue";
     padding-right: 17px;
     -webkit-transition: all 1s ease-in-out;
@@ -163,6 +168,7 @@ footer{
     font-size: 20px;
     border-radius: 50%;
     border: 1;
+    border-color: white;
     height: 53px;
     width: 53px;
     margin-left: 13px;
