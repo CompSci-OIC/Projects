@@ -107,16 +107,16 @@
                         <input id="sendButton" class="sendButtonBlack" type="button">
                     </div>
                 </footer>
-                {{ room_name|json_script:"room-name"}}
+                {{ room_id|json_script:"room-id"}}
                 <script>
                     const name = Math.random();
-                    const roomName = JSON.parse(document.getElementById('room-name').textContent);
+                    const roomId = JSON.parse(document.getElementById('room-id').textContent);
 
                     const chatSocket = new WebSocket(
                         'ws://'
                         + window.location.host
                         + '/ws/chat/'
-                        + roomName
+                        + roomId
                         + '/'
                     );
 

@@ -24,6 +24,9 @@ class CustomGroup(models.Model):
     def user_count(self):
         return len(self.joined_users.strip().split(" "))
 
+    def get_users(self):
+        return self.joined_users.strip().split(" ")
+
 
 
 class Message(models.Model):

@@ -115,10 +115,13 @@ def room(request, room_id):
     # check if group exists, if not group selection screen
     # check if user is in the group if not add him
     # render
+    userString = ""
     group = CustomGroup.objects.get(id = room_id)
-
+    for id in group.get_users():
+        userString += id + '\n'
 
     return render(request, 'chat/room.html', {
         'room_id': group.id,
-        'room_name': group.group_name
+        'room_name': group.group_name,
+        'Participants': userString
     })
