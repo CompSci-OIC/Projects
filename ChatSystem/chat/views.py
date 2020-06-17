@@ -11,10 +11,15 @@ def index(request):
         form = NameForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['your_name']
-            request.session['userId'] = name
+            user = CustomUser(name = name)
+            user.save()
+            request.session['userId'] = user.id
             return redirect('group_selection')
     if request.method == 'GET':
-
+        if 'userId' in request.session:
+            userId = request.session['userId']
+            print(len(CustomUser.objects.all()))
+            CustomUser.objects.get(id = userId).delete()
         request.session.flush()
         form = NameForm()
     return render(request, 'chat/index.html',{
@@ -39,7 +44,7 @@ def group_selection(request):#!!!!
         if request.session['errorFlag'] == 1:
             request.session['errorFlag'] = 0
             errorFlag = 1
-
+    print(request.session['userId'])
 
 
     form = JoinGroupForm()
@@ -64,7 +69,7 @@ def group_selection(request):#!!!!
                 return redirect('.')
 
     return render(request, 'chat/select.html', {
-        'username': request.session['userId'],
+        'username': CustomUser.objects.get(id = request.session['userId']).name,
         'groupForm': form,
         'errorFlag': errorFlag
     })
@@ -99,7 +104,7 @@ def create_group(request):
     # instance.save()
 
     return render(request, 'chat/createGroup.html', {
-            'username': request.session['username'],
+            'username':  CustomUser.objects.get(id = request.session['userId']).name,
             'groupForm': form,
             'group_id': group.id
 
@@ -124,5 +129,7 @@ def room(request, room_id):
     return render(request, 'chat/room.html', {
         'room_id': group.id,
         'room_name': group.group_name,
-        'Participants': group.get_users()
+        'Participants': group.get_users(),
+        'user_id': request.session['userId'],
+        'user_name': CustomUser.objects.get(id = request.session['userId']).name
     })

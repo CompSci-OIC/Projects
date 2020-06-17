@@ -115,7 +115,7 @@
                 </footer>
                 {{ room_id|json_script:"room-id"}}
                 <script>
-                    const name = Math.random();
+                    const name = "{{user_name}}#{{user_id}}";
                     const roomId = JSON.parse(document.getElementById('room-id').textContent);
 
                     const chatSocket = new WebSocket(
@@ -125,6 +125,8 @@
                         + roomId
                         + '/'
                     );
+
+
 
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);

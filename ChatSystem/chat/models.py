@@ -22,6 +22,15 @@ class CustomGroup(models.Model):
     def get_users(self):
         return self.joined_users.strip().split(" ")
 
+    def delete_user(self, user):
+        userList = self.get_users
+        userList.pop(str(user))
+        newStr = ""
+        for each in userList:
+            newStr = newStr + each + " "
+        newStr = newStr.strip()
+        self.joined_users = newStr
+
 
 
 class Message(models.Model):
