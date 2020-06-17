@@ -4,10 +4,6 @@ from django import forms
 class CustomUser(models.Model):
     name = models.CharField(max_length = 200)
 
-
-
-
-
     pass
 
 class CustomGroup(models.Model):
