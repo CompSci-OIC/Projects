@@ -207,7 +207,8 @@ footer{
 
 .userList{
     flex: 90%;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: auto;
 }
 
 #groupID{
