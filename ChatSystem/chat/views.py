@@ -39,14 +39,23 @@ def group_selection(request):#!!!!
 
     if request.method == 'POST':
         form = JoinGroupForm(request.POST)
+        errorFlag = False
         if form.is_valid():
-            name = form.cleaned_data['group_name']
-            return redirect('../room/' +name )
+
+            groupId = form.cleaned_data['group_id']
+            if groupId.isnumeric():
+                if CustomGroup.objects.filter(id = int(groupId)).exists():
+                    return redirect('../room/' + groupId)
+                else:
+                    errorFlag = True
+            else:
+                errorFlag = True
 
 
     return render(request, 'chat/select.html', {
         'username': request.session['username'],
-        'groupForm': form
+        'groupForm': form,
+        'errorFlag': errorFlag
     })
 
 def create_group(request):
