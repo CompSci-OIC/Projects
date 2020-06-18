@@ -12,9 +12,12 @@ header{
 #mode{
     padding-top: 13px;
     padding-bottom: 0px;
+    position: absolute;
     display: flex;
     align-items: center;
-    margin-left: 766px;    /*so that "Chat Room" header donesn't split when page is scaled*/
+    margin-left: 51.5%;    /*so that "Chat Room" header donesn't split when page is scaled*/
+
+
 }
 
 .item{
@@ -128,7 +131,7 @@ body{
     width: 1203px;
     height: 742px;
     margin:0;/*remove defaults*/
-    font-family: 'Georgia';
+    font-family: 'Times New Roman';
     font-size: 22;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
