@@ -146,7 +146,14 @@
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);
                         if (data.header == 'header'){
+                          if (data.name == 'connect'){
                             document.querySelector('#participantsList').value += (data.message)
+                          }
+                          else{
+                            document.querySelector('#participantsList').value = document.querySelector('#participantsList').value.replace(data.message, "")
+
+                          }
+
                         }
                         else{
                         document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
