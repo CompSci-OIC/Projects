@@ -257,6 +257,13 @@ footer{
 
 }
 
+#participantsList{
+    border: 0;
+    height: 100%;
+    width: 100%
+
+}
+
 
 .setup /* Layout for all setup pages (index, select, createGroup)*/
 {
