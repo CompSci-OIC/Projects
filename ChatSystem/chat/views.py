@@ -60,7 +60,6 @@ def group_selection(request):#!!!!
             if groupId.isnumeric():
                 if CustomGroup.objects.filter(id = int(groupId)).exists():
                     group = CustomGroup.objects.get(id = int(groupId))
-                    group.add_user(int(request.session['userId']))
                     group.save()
                     return redirect('../room/' + groupId)
                 else:
@@ -96,7 +95,6 @@ def create_group(request):
             name = form.cleaned_data['group_name']
             request.session.pop('group_id')
             group.group_name = name
-            group.add_user(int(request.session['userId']))
             group.save()
 
             return redirect('../room/' + str(group.id))
@@ -127,7 +125,7 @@ def room(request, room_id):
     userString = ""
     group = CustomGroup.objects.get(id = room_id)
     newList = group.get_users()
-    newList = map(lambda x: CustomUser.objects.get(id = int(x)).name + "#"+ x, newList )
+    newList = list(map(lambda x: CustomUser.objects.get(id = int(x)).name + "#"+ x, newList ))
 
     return render(request, 'chat/room.html', {
         'room_id': group.id,

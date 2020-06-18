@@ -50,6 +50,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         else:
             self.user_id = int(message)
+            self.group.add_user(int(request.session['userId']))
+            self.group.save()
             print("lalala",self.user_id)
 
     # Receive message from room group
