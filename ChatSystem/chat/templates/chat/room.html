@@ -24,9 +24,7 @@
                         <header id="head1"><h1>Participants</h1></header>
                         <div class="userList">
                             <h2>
-                              {% for name in {{Participants}} %}
-                                <h3>{{name}}</h3>
-                              {% endfor %}
+                                <textarea id=participantsList></textarea/>
                             </h2>
 
                         </div>
@@ -138,7 +136,7 @@
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);
                         if (data.header == 'header'){
-
+                            document.querySelector('#participantsList').value = (data.userList)
                         }
                         else{
                         document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
