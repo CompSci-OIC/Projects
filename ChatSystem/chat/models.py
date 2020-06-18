@@ -12,19 +12,25 @@ class CustomGroup(models.Model):
 
 
     def add_user(self, user):
-        self.joined_users = self.joined_users + str(user) + str(" ")
+        self.joined_users = self.joined_users + " " +str(user)
 
         pass
 
     def user_count(self):
-        return len(self.joined_users.strip().split(" "))
+        g = self.joined_users.strip().split(" ")
+        if g == ['']:
+            return 0
+        else:
+            return len(self.joined_users.strip().split(" "))
 
     def get_users(self):
         return self.joined_users.strip().split(" ")
 
     def delete_user(self, user):
-        userList = self.get_users
-        userList.pop(str(user))
+        userList = self.get_users()
+        print("A", userList)
+        userList.remove(str(user))
+        print("b", userList)
         newStr = ""
         for each in userList:
             newStr = newStr + each + " "

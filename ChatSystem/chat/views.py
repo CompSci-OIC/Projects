@@ -1,6 +1,7 @@
 # chat/views.py
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
+import json
 
 from .forms import NameForm , GroupForm, JoinGroupForm
 from .models import CustomGroup, CustomUser
@@ -59,6 +60,8 @@ def group_selection(request):#!!!!
             groupId = form.cleaned_data['group_id']
             if groupId.isnumeric():
                 if CustomGroup.objects.filter(id = int(groupId)).exists():
+                    group = CustomGroup.objects.get(id = int(groupId))
+                    group.save()
                     return redirect('../room/' + groupId)
                 else:
                     errorFlag = 1
@@ -94,8 +97,6 @@ def create_group(request):
             request.session.pop('group_id')
             group.group_name = name
             group.save()
-            group.add_user(12)
-            print(group.user_count())
 
             return redirect('../room/' + str(group.id))
     if request.method == 'GET':
@@ -118,28 +119,17 @@ def not_found(request):
     pass
 
 def room(request, room_id):
+    if not('userId' in request.session):
+        return redirect('index')
     # check if session started go to create_name page in case not
     # check if group exists, if not group selection screen
     # check if user is in the group if not add him
     # render
     userString = ""
     group = CustomGroup.objects.get(id = room_id)
-    for id in group.get_users():
-        userString += id + "\n"
-
     return render(request, 'chat/room.html', {
         'room_id': group.id,
         'room_name': group.group_name,
-        'Participants': group.get_users(),
         'user_id': request.session['userId'],
         'user_name': CustomUser.objects.get(id = request.session['userId']).name
     })
-
-
-
-def in_group(request):
-    print("hello")
-    if request.is_ajax():
-        print('hello')
-    else:
-        raise Http404
