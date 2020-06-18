@@ -22,12 +22,9 @@
                 <div class="sub-container">
                     <div class="button-else">
                         <header id="head1"><h1>Participants</h1></header>
-                        <div class="userList">
-                            <h2>
-                                <textarea id=participantsList></textarea>
-                            </h2>
+                        <textarea id="userList">
 
-                        </div>
+                        </textarea>
                         <div id="groupID"><h2>group ID: {{room_id}}</h2></div>
                     </div>
                     <div class="theButton">
@@ -133,7 +130,7 @@
                     }
                     var i;
                     for (i = 0; i< userList.length; i++){
-                      document.querySelector('#participantsList').value += userList[i] +'\n'
+                      document.querySelector('#userList').value += userList[i] +'\n'
 
 
                     }
