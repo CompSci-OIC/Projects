@@ -27,8 +27,6 @@
                               {% for name in Participants %}
                                 <h3>{{name}}</h3>
                               {% endfor %}
-
-
                             </h2>
 
                         </div>
@@ -54,12 +52,13 @@
                             <script>
                             function toggleCheck() {
                                 document.getElementById("sendButton").classList.toggle("sendButtonWhite")
-                                if(document.getElementById("checkBox").checked){
+                                if(document.getElementById("checkBox").checked){    //
                                     document.getElementById("groupID").style.color="white";
                                     document.getElementById("leaveGroupButt").style.backgroundColor="#090909";
                                     document.getElementById("leaveGroupButt").style.color="white";
-                                    document.getElementById("chat-log").style.borderColor="#CCC";
-                                    document.getElementById("chat-log").style.backgroundColor="#202020";
+                                    document.getElementById("chat-log").style.borderColor="#FFFFFF";
+                                    document.getElementById("chat-log").style.color="#FFFFFF";
+                                    document.getElementById("chat-log").style.backgroundColor="#000000";
                                     document.getElementById("pageBody").style.backgroundColor="#090909";
                                     document.getElementById("pageBody").style.color="white";
                                     document.getElementById("head1").style.color="white";
@@ -69,8 +68,9 @@
                                 }
                                 else{
                                     document.getElementById("groupID").style.color="black";
-                                    document.getElementById("chat-log").style.backgroundColor="#F0F0F0";
+                                    document.getElementById("chat-log").style.backgroundColor="#FFFFFF";
                                     document.getElementById("chat-log").style.borderColor="black";
+                                    document.getElementById("chat-log").style.color="#000000";
                                     document.getElementById("pageBody").style.backgroundColor="white";
                                     document.getElementById("leaveGroupButt").style.color="black";
                                     document.getElementById("leaveGroupButt").style.backgroundColor="white";
@@ -78,8 +78,6 @@
                                     document.getElementById("head1").style.color="black";
                                     document.getElementById("head2").style.color="black";
                                     document.getElementById("userList").style.color="black";
-
-
 
                                 }
                             }
@@ -91,7 +89,25 @@
                     </div>
                 </header>
                 <div>
-                    <textarea disabled id="chat-log" cols="100" rows="20" ></textarea><br>
+                    <textarea disabled id="chat-log" cols="100" rows="20" style="color: #000000;
+                    padding: 10px;
+                    border-radius: 15px;
+                    background-color: #FFFFFF;
+                    border: 2px solid black;
+                    -moz-box-sizing:border-box;
+                    -webkit-box-sizing:border-box;
+                    box-sizing:border-box;
+                    display:block;/*reset from inline*/
+                    width: 1203px;
+                    height: 742px;
+                    margin:0;/*remove defaults*/
+                    font-family:  "Helvetica Neue";
+                    font-size: 20px;
+                    -webkit-transition: all 1s ease-in-out;
+                    -moz-transition: all 1s ease-in-out;
+                    -o-transition: all 1s ease-in-out;
+                    -ms-transition: all 1s ease-in-out;
+                    transition: all 1s ease-in-out;"></textarea><br>
 
                 </div>
                 <footer>
@@ -125,6 +141,14 @@
                         + '/'
                     );
 
+                    const headerMsg = JSON.stringify({
+                        'header': "header",
+                        'message': "{{user_name}}",
+                        'name': "{{user_name}}"
+                    });
+                    setTimeout(function(){
+                      chatSocket.send(headerMsg)
+                    }, 1000);
 
 
                     chatSocket.onmessage = function(e) {
@@ -147,6 +171,7 @@
                         const messageInputDom = document.querySelector('#chat-message-input');
                         const message = messageInputDom.value;
                         const msg = JSON.stringify({
+                            'header': "normal",
                             'message': message,
                             'name': name
                         });
