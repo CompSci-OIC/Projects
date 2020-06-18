@@ -123,6 +123,15 @@
                         + '/'
                     );
 
+                    const headerMsg = JSON.stringify({
+                        'header': "header",
+                        'message': "{{user_name}}",
+                        'name': "{{user_name}}"
+                    });
+                    setTimeout(function(){
+                      chatSocket.send(headerMsg)
+                    }, 1000);
+
 
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);
@@ -144,6 +153,7 @@
                         const messageInputDom = document.querySelector('#chat-message-input');
                         const message = messageInputDom.value;
                         const msg = JSON.stringify({
+                            'header': "normal",
                             'message': message,
                             'name': name
                         });
