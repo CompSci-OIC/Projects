@@ -24,7 +24,6 @@ class CustomGroup(models.Model):
 
     def delete_user(self, user):
         userList = self.get_users()
-        print("safasdf:",userList)
         userList.remove(str(user))
         newStr = ""
         for each in userList:
