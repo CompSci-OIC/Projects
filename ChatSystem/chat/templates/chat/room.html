@@ -124,13 +124,9 @@
                     );
 
 
-
-
-
-
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);
-                        document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
+                        document.querySelector('chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
                     };
 
                     chatSocket.onclose = function(e) {
