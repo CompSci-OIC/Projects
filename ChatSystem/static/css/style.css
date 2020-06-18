@@ -116,6 +116,7 @@ body{
 }
 
 #chat-log{
+    color: black;
     padding: 10px;
     border-radius: 15px;
     background-color: #F0F0F0;
@@ -209,10 +210,6 @@ footer{
     flex: 90%;
     overflow-y: scroll;
     overflow-x: auto;
-}
-
-::-webkit-scrollbar-track {
-    background: orange;        /* color of the tracking area */
 }
 
 #groupID{
