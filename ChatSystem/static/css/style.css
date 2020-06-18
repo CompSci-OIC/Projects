@@ -129,7 +129,7 @@ body{
     height: 742px;
     margin:0;/*remove defaults*/
     font-family:  "Helvetica Neue";
-    font-size: 15px;
+    font-size: 20px;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
