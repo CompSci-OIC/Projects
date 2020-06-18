@@ -280,19 +280,20 @@ footer{
 {
     font-size: x-large;
     position: absolute;
-    top: 5px;
-    right: 20px;
+    top: 0%;
+    right: 0%; /*Will make the name tag sit on the right*/
     margin-right: 5%;
 }
 
 #backButton
 {
-    width: 120px;
-    height: 46px;
+    width: fit-content;
+    height: fit-content;
     font-size: x-large;
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: 2.5%;
+    left: 0;
+    margin-left: 2%;
     border-radius: 15px;
     border: 1;
 }
@@ -316,12 +317,11 @@ footer{
 #nameButton
 {
     margin-left: 10px;
-    width: 80px;
-    height: 46px;
+    width: fit-content;
+    height: fit-content;
     font-size: x-large;
     border-radius: 15px;
     border: 1;
-
 }
 
 #groupsetupHeading
@@ -345,8 +345,8 @@ footer{
 #groupsetupButton
 {
     margin-left: -1px;
-    width: 100px;
-    height: 44px;
+    width: fit-content;
+    height: fit-content;
     font-size: x-large;
     border-radius: 15px;
     border: 1;
