@@ -1,5 +1,6 @@
 # chat/views.py
 from django.shortcuts import render, redirect
+from django.http import Http404, HttpResponse
 
 from .forms import NameForm , GroupForm, JoinGroupForm
 from .models import CustomGroup, CustomUser
@@ -133,3 +134,11 @@ def room(request, room_id):
         'user_id': request.session['userId'],
         'user_name': CustomUser.objects.get(id = request.session['userId']).name
     })
+
+
+
+def in_group(request):
+    if request.is_ajax():
+        print('hello')
+    else:
+        raise Http404

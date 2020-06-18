@@ -125,6 +125,19 @@
                         + '/'
                     );
 
+                    function awake_signal(){
+                      $.ajax({
+                        type: "POST",
+                        url: "../ajax/check"
+
+
+
+                      });
+
+
+                    };
+
+
 
 
                     chatSocket.onmessage = function(e) {
