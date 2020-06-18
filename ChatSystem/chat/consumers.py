@@ -1,12 +1,17 @@
 # chat/consumers.py
 import json
+import os
 from channels.generic.websocket import AsyncWebsocketConsumer
 from .models import CustomGroup, CustomUser
+from asgiref.sync import sync_to_async
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
+        self.group = CustomGroup.objects.get(id = int(self.room_name))
         # Join room group
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -17,6 +22,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, close_code):
         # Leave room group
+        self.group.delete_user(self.user_id)
+        self.group.save()
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
@@ -43,6 +50,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         else:
             self.user_id = int(message)
+            print("lalala",self.user_id)
 
     # Receive message from room group
     async def chat_message(self, event):

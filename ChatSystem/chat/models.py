@@ -12,7 +12,7 @@ class CustomGroup(models.Model):
 
 
     def add_user(self, user):
-        self.joined_users = self.joined_users + str(user) + str(" ")
+        self.joined_users = self.joined_users + " " +str(user)
 
         pass
 
@@ -23,8 +23,8 @@ class CustomGroup(models.Model):
         return self.joined_users.strip().split(" ")
 
     def delete_user(self, user):
-        userList = self.get_users
-        userList.pop(str(user))
+        userList = self.get_users()
+        userList.remove(str(user))
         newStr = ""
         for each in userList:
             newStr = newStr + each + " "

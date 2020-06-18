@@ -59,6 +59,9 @@ def group_selection(request):#!!!!
             groupId = form.cleaned_data['group_id']
             if groupId.isnumeric():
                 if CustomGroup.objects.filter(id = int(groupId)).exists():
+                    group = CustomGroup.objects.get(id = int(groupId))
+                    group.add_user(int(request.session['userId']))
+                    group.save()
                     return redirect('../room/' + groupId)
                 else:
                     errorFlag = 1
@@ -93,9 +96,8 @@ def create_group(request):
             name = form.cleaned_data['group_name']
             request.session.pop('group_id')
             group.group_name = name
+            group.add_user(int(request.session['userId']))
             group.save()
-            group.add_user(12)
-            print(group.user_count())
 
             return redirect('../room/' + str(group.id))
     if request.method == 'GET':
@@ -134,12 +136,3 @@ def room(request, room_id):
         'user_id': request.session['userId'],
         'user_name': CustomUser.objects.get(id = request.session['userId']).name
     })
-
-
-
-def in_group(request):
-    print("hello")
-    if request.is_ajax():
-        print('hello')
-    else:
-        raise Http404
