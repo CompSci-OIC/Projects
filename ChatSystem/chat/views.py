@@ -138,6 +138,7 @@ def room(request, room_id):
 
 
 def in_group(request):
+    print("hello")
     if request.is_ajax():
         print('hello')
     else:
