@@ -17,7 +17,11 @@ class CustomGroup(models.Model):
         pass
 
     def user_count(self):
-        return len(self.joined_users.strip().split(" "))
+        g = self.joined_users.strip().split(" ")
+        if g == ['']:
+            return 0
+        else:
+            return len(self.joined_users.strip().split(" "))
 
     def get_users(self):
         return self.joined_users.strip().split(" ")

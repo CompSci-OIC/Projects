@@ -119,6 +119,8 @@ def not_found(request):
     pass
 
 def room(request, room_id):
+    if not('userId' in request.session):
+        return redirect('index')
     # check if session started go to create_name page in case not
     # check if group exists, if not group selection screen
     # check if user is in the group if not add him

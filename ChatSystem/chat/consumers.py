@@ -30,8 +30,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, close_code):
         # Leave room group
+        self.group = CustomGroup.objects.get(id = int(self.room_name))
         self.group.delete_user(self.user_id)
         self.group.save()
+        if self.group.user_count() == 0:
+            self.group.delete()
+        print(self.group.user_count())
         newList = self.group.get_users()
         anotherList = []
         if newList != ['']:
@@ -75,6 +79,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         else:
             self.user_id = int(message)
             self.user = CustomUser.objects.get(id = int(self.user_id))
+            self.group = CustomGroup.objects.get(id = int(self.room_name))
             self.group.add_user(self.user_id)
             newList = self.group.get_users()
             anotherList = []
