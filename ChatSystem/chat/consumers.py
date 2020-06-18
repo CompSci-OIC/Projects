@@ -28,6 +28,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'header': 'header',
+                'message': self.user_id,
+                'name': "disconnect"
+            }
+        )
 
 
     # Receive message from WebSocket
@@ -59,7 +68,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'type': 'chat_message',
                     'header': 'header',
                     'message': self.user_id,
-                    'name': "stuff"
+                    'name': "connect"
                 }
             )
 
