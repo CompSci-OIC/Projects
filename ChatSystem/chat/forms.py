@@ -6,7 +6,6 @@ class NameForm(forms.Form):
         'type':"text",
         'placeholder':"Enter name here",
         'id':"nameForm",
-        'novalidate': "True"
         }))
 
 class GroupForm(forms.Form):
