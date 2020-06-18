@@ -33,7 +33,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             {
                 'type': 'chat_message',
                 'header': 'header',
-                'message': self.user_id,
+                'message': self.user.name + "#" + str(self.user_id),
                 'name': "disconnect"
             }
         )
@@ -59,6 +59,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         else:
             self.user_id = int(message)
+            self.user = CustomUser.objects.get(id = int(self.user_id))
             self.group.add_user(self.user_id)
             self.group.save()
             print("lalala",self.user_id)
@@ -67,7 +68,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 {
                     'type': 'chat_message',
                     'header': 'header',
-                    'message': self.user_id,
+                    'message': self.user.name + "#"+str(self.user_id),
                     'name': "connect"
                 }
             )

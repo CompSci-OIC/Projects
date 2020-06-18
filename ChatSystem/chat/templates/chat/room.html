@@ -110,7 +110,6 @@
                     const name = "{{user_name}}#{{user_id}}";
                     const roomId = JSON.parse(document.getElementById('room-id').textContent);
                     var userList = {{Participants|safe}};
-                    window.alert(userList);
                     const chatSocket = new WebSocket(
                         'ws://'
                         + window.location.host
@@ -144,7 +143,7 @@
                         const data = JSON.parse(e.data);
                         if (data.header == 'header'){
                           if (data.name == 'connect'){
-                            document.querySelector('#participantsList').value += (data.message)
+                            document.querySelector('#participantsList').value += '\n' + data.message
                           }
                           else{
                             document.querySelector('#participantsList').value = document.querySelector('#participantsList').value.replace(data.message, "")
