@@ -22,8 +22,14 @@
                 <div class="sub-container">
                     <div class="button-else">
                         <header id="head1"><h1>Participants</h1></header>
-                        <div id="userList">
-                            <h2>Person1</h2>
+                        <div class="userList">
+                            <h2>
+                              {% for name in Participants %}
+                                <h3>{{name}}</h3>
+                              {% endfor %}
+
+
+                            </h2>
 
                         </div>
                         <div id="groupID"><h2>group ID: {{room_id}}</h2></div>
@@ -49,32 +55,31 @@
                             function toggleCheck() {
                                 document.getElementById("sendButton").classList.toggle("sendButtonWhite")
                                 if(document.getElementById("checkBox").checked){
+                                    document.getElementById("groupID").style.color="white";
+                                    document.getElementById("leaveGroupButt").style.backgroundColor="#090909";
+                                    document.getElementById("leaveGroupButt").style.color="white";
+                                    document.getElementById("chat-log").style.borderColor="#CCC";
+                                    document.getElementById("chat-log").style.backgroundColor="#202020";
                                     document.getElementById("pageBody").style.backgroundColor="#090909";
                                     document.getElementById("pageBody").style.color="white";
                                     document.getElementById("head1").style.color="white";
                                     document.getElementById("head2").style.color="white";
                                     document.getElementById("userList").style.color="white";
-                                    document.getElementById("groupID").style.color="white";
-                                    document.getElementById("chat-log").style.backgroundColor="#161616";
-                                    document.getElementById("chat-log").style.borderColor="#CCC";
-                                    document.getElementById("leaveGroupButt").style.backgroundColor="#090909";
-                                    document.getElementById("leaveGroupButt").style.color="white";
-                                    document.getElementById("leaveGroupButt").style.borderColor="#CCC";
-                                    document.getElementById("chat-message-input").style.backgroundColor="white";
 
                                 }
                                 else{
+                                    document.getElementById("groupID").style.color="black";
+                                    document.getElementById("chat-log").style.backgroundColor="#F0F0F0";
+                                    document.getElementById("chat-log").style.borderColor="black";
                                     document.getElementById("pageBody").style.backgroundColor="white";
+                                    document.getElementById("leaveGroupButt").style.color="black";
+                                    document.getElementById("leaveGroupButt").style.backgroundColor="white";
                                     document.getElementById("pageBody").style.color="black";
                                     document.getElementById("head1").style.color="black";
                                     document.getElementById("head2").style.color="black";
                                     document.getElementById("userList").style.color="black";
-                                    document.getElementById("groupID").style.color="black";
-                                    document.getElementById("chat-log").style.backgroundColor="#F0F0F0";
-                                    document.getElementById("chat-log").style.borderColor="black";
-                                    document.getElementById("leaveGroupButt").style.color="black";
-                                    document.getElementById("leaveGroupButt").style.backgroundColor="white";
-                                    document.getElementById("chat-message-input").style.backgroundColor="white";
+
+
 
                                 }
                             }
@@ -86,7 +91,7 @@
                     </div>
                 </header>
                 <div>
-                    <textarea id="chat-log" cols="100" rows="20" ></textarea><br>
+                    <textarea disabled id="chat-log" cols="100" rows="20" ></textarea><br>
 
                 </div>
                 <footer>
@@ -107,18 +112,20 @@
                         <input id="sendButton" class="sendButtonBlack" type="button">
                     </div>
                 </footer>
-                {{ room_name|json_script:"room-name"}}
+                {{ room_id|json_script:"room-id"}}
                 <script>
-                    const name = Math.random();
-                    const roomName = JSON.parse(document.getElementById('room-name').textContent);
+                    const name = "{{user_name}}#{{user_id}}";
+                    const roomId = JSON.parse(document.getElementById('room-id').textContent);
 
                     const chatSocket = new WebSocket(
                         'ws://'
                         + window.location.host
                         + '/ws/chat/'
-                        + roomName
+                        + roomId
                         + '/'
                     );
+
+
 
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);

@@ -3,11 +3,6 @@ from django import forms
 
 class CustomUser(models.Model):
     name = models.CharField(max_length = 200)
-    joined_group = models.CharField(max_length = 5)
-
-
-
-
 
     pass
 
@@ -23,6 +18,18 @@ class CustomGroup(models.Model):
 
     def user_count(self):
         return len(self.joined_users.strip().split(" "))
+
+    def get_users(self):
+        return self.joined_users.strip().split(" ")
+
+    def delete_user(self, user):
+        userList = self.get_users
+        userList.pop(str(user))
+        newStr = ""
+        for each in userList:
+            newStr = newStr + each + " "
+        newStr = newStr.strip()
+        self.joined_users = newStr
 
 
 

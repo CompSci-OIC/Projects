@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect
 
 from .forms import NameForm , GroupForm, JoinGroupForm
-from .models import CustomGroup
+from .models import CustomGroup, CustomUser
 
 
 def index(request):
@@ -11,9 +11,15 @@ def index(request):
         form = NameForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['your_name']
-            request.session['username'] = name
+            user = CustomUser(name = name)
+            user.save()
+            request.session['userId'] = user.id
             return redirect('group_selection')
     if request.method == 'GET':
+        if 'userId' in request.session:
+            userId = request.session['userId']
+            print(len(CustomUser.objects.all()))
+            CustomUser.objects.get(id = userId).delete()
         request.session.flush()
         form = NameForm()
     return render(request, 'chat/index.html',{
@@ -38,11 +44,11 @@ def group_selection(request):#!!!!
         if request.session['errorFlag'] == 1:
             request.session['errorFlag'] = 0
             errorFlag = 1
-
+    print(request.session['userId'])
 
 
     form = JoinGroupForm()
-    if not('username' in request.session):
+    if not('userId' in request.session):
         return redirect('index')
 
     if request.method == 'POST':
@@ -63,7 +69,7 @@ def group_selection(request):#!!!!
                 return redirect('.')
 
     return render(request, 'chat/select.html', {
-        'username': request.session['username'],
+        'username': CustomUser.objects.get(id = request.session['userId']).name,
         'groupForm': form,
         'errorFlag': errorFlag
     })
@@ -78,7 +84,7 @@ def create_group(request):
         group.save()
         request.session['group_id'] = group.id
 
-    if not('username' in request.session):
+    if not('userId' in request.session):
         return redirect('index')
     if request.method == 'POST':
         form = GroupForm(request.POST)
@@ -98,7 +104,7 @@ def create_group(request):
     # instance.save()
 
     return render(request, 'chat/createGroup.html', {
-            'username': request.session['username'],
+            'username':  CustomUser.objects.get(id = request.session['userId']).name,
             'groupForm': form,
             'group_id': group.id
 
@@ -115,10 +121,15 @@ def room(request, room_id):
     # check if group exists, if not group selection screen
     # check if user is in the group if not add him
     # render
+    userString = ""
     group = CustomGroup.objects.get(id = room_id)
-
+    for id in group.get_users():
+        userString += id + "\n"
 
     return render(request, 'chat/room.html', {
         'room_id': group.id,
-        'room_name': group.group_name
+        'room_name': group.group_name,
+        'Participants': group.get_users(),
+        'user_id': request.session['userId'],
+        'user_name': CustomUser.objects.get(id = request.session['userId']).name
     })

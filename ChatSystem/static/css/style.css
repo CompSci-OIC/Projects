@@ -205,8 +205,14 @@ footer{
     border: 2px;
 }
 
-#userList{
+.userList{
     flex: 90%;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+::-webkit-scrollbar-track {
+    background: orange;        /* color of the tracking area */
 }
 
 #groupID{
@@ -218,6 +224,7 @@ footer{
     flex: 10%;
     height: 46px;
     border: 2px;
+
 }
 
 #leaveGroupButt{
