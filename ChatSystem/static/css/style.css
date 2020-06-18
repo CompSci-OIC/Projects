@@ -206,7 +206,7 @@ footer{
     border: 2px;
 }
 
-#userList{
+.userList{
     flex: 90%;
     overflow-y: scroll;
     overflow-x: auto;
@@ -261,7 +261,7 @@ footer{
     border: 0;
     height: 100%;
     width: 100%
-    
+
 }
 
 
