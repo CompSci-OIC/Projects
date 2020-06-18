@@ -42,7 +42,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             )
         else:
-            print('pooop')
+            self.user_id = int(message)
 
     # Receive message from room group
     async def chat_message(self, event):
