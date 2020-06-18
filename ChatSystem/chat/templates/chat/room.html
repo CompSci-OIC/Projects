@@ -24,7 +24,7 @@
                         <header id="head1"><h1>Participants</h1></header>
                         <div class="userList">
                             <h2>
-                                <div id=participantsList></div>
+                                <textarea id=participantsList></textarea>
                             </h2>
 
                         </div>
@@ -112,7 +112,8 @@
                 <script>
                     const name = "{{user_name}}#{{user_id}}";
                     const roomId = JSON.parse(document.getElementById('room-id').textContent);
-
+                    var userList = {{Participants|safe}};
+                    window.alert(userList);
                     const chatSocket = new WebSocket(
                         'ws://'
                         + window.location.host
@@ -130,13 +131,22 @@
                     chatSocket.onopen = function(e){
                       chatSocket.send(headerMsg)
                     }
+                    var i;
+                    for (i = 0; i< userList.length; i++){
+                      document.querySelector('#participantsList').value += userList[i] +'\n'
+
+
+                    }
+
+
+
 
 
 
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);
                         if (data.header == 'header'){
-                            document.querySelector('#participantsList').value = (data.userList)
+                            document.querySelector('#participantsList').value += (data.message)
                         }
                         else{
                         document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended

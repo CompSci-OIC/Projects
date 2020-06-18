@@ -1,6 +1,7 @@
 # chat/views.py
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
+import json
 
 from .forms import NameForm , GroupForm, JoinGroupForm
 from .models import CustomGroup, CustomUser
@@ -125,12 +126,11 @@ def room(request, room_id):
     userString = ""
     group = CustomGroup.objects.get(id = room_id)
     newList = group.get_users()
-    newList = list(map(lambda x: CustomUser.objects.get(id = int(x)).name + "#"+ x, newList ))
-
+    json_list = json.dumps(newList)
     return render(request, 'chat/room.html', {
         'room_id': group.id,
         'room_name': group.group_name,
-        'Participants': newList,
+        'Participants': json_list,
         'user_id': request.session['userId'],
         'user_name': CustomUser.objects.get(id = request.session['userId']).name
     })

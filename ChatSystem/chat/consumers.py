@@ -50,9 +50,18 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         else:
             self.user_id = int(message)
-            self.group.add_user(int(request.session['userId']))
+            self.group.add_user(self.user_id)
             self.group.save()
             print("lalala",self.user_id)
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'header': 'header',
+                    'message': self.user_id,
+                    'name': "stuff"
+                }
+            )
 
     # Receive message from room group
     async def chat_message(self, event):
