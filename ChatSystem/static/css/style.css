@@ -128,7 +128,7 @@ body{
     width: 1203px;
     height: 742px;
     margin:0;/*remove defaults*/
-    font-family:  "Helvetica Neue";
+    font-family: 'Helvetica Neue'
     font-size: 20px;
     -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
