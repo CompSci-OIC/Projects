@@ -22,14 +22,11 @@
                 <div class="sub-container">
                     <div class="button-else">
                         <header id="head1"><h1>Participants</h1></header>
-                        <div class="userList">
-                            <h2>
-                              {% for name in Participants %}
-                                <h3>{{name}}</h3>
-                              {% endfor %}
-                            </h2>
 
+                        <div class="userList">
+                            <textarea disabled style="resize:none;" id=participantsList></textarea>
                         </div>
+
                         <div id="groupID"><h2>group ID: {{room_id}}</h2></div>
                     </div>
                     <div class="theButton">
@@ -63,7 +60,8 @@
                                     document.getElementById("pageBody").style.color="white";
                                     document.getElementById("head1").style.color="white";
                                     document.getElementById("head2").style.color="white";
-                                    document.getElementById("userList").style.color="white";
+                                    document.getElementById("participantsList").style.color="white";
+                                    document.getElementById("participantsList").style.backgroundColor="#090909";
 
                                 }
                                 else{
@@ -77,7 +75,8 @@
                                     document.getElementById("pageBody").style.color="black";
                                     document.getElementById("head1").style.color="black";
                                     document.getElementById("head2").style.color="black";
-                                    document.getElementById("userList").style.color="black";
+                                    document.getElementById("participantsList").style.color="black";
+                                    document.getElementById("participantsList").style.backgroundColor="white";
 
                                 }
                             }
@@ -114,7 +113,6 @@
                 <script>
                     const name = "{{user_name}}#{{user_id}}";
                     const roomId = JSON.parse(document.getElementById('room-id').textContent);
-
                     const chatSocket = new WebSocket(
                         'ws://'
                         + window.location.host
@@ -128,14 +126,34 @@
                         'message': "{{user_id}}",
                         'name': "{{user_name}}"
                     });
-                    setTimeout(function(){
+
+                    chatSocket.onopen = function(e){
                       chatSocket.send(headerMsg)
-                    }, 1000);
+                    }
+
+
+
+
+
 
 
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);
-                        document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
+                        if (data.header == 'header'){
+                          if (data.name == 'connect'){
+                            document.querySelector('#participantsList').value = data.message
+                          }
+                          else{
+                            document.querySelector('#participantsList').value = data.message
+
+                          }
+
+                        }
+                        else{
+                            document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
+                            var textarea = document.getElementById('chat-log');
+                            textarea.scrollTop = textarea.scrollHeight;
+                        }
                     };
 
                     chatSocket.onclose = function(e) {
