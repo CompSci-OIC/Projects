@@ -211,6 +211,10 @@ footer{
     overflow-x: auto;
 }
 
+::-webkit-scrollbar-track {
+    background: orange;        /* color of the tracking area */
+}
+
 #groupID{
     flex: 10%;
     margin-bottom: 0;
@@ -220,6 +224,7 @@ footer{
     flex: 10%;
     height: 46px;
     border: 2px;
+
 }
 
 #leaveGroupButt{
