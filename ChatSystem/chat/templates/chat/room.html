@@ -113,7 +113,6 @@
                 <script>
                     const name = "{{user_name}}#{{user_id}}";
                     const roomId = JSON.parse(document.getElementById('room-id').textContent);
-                    var userList = {{Participants|safe}};
                     const chatSocket = new WebSocket(
                         'ws://'
                         + window.location.host
@@ -131,12 +130,7 @@
                     chatSocket.onopen = function(e){
                       chatSocket.send(headerMsg)
                     }
-                    var i;
-                    for (i = 0; i< userList.length; i++){
-                      document.querySelector('#participantsList').value += userList[i] +'\n'
 
-
-                    }
 
 
 
@@ -147,10 +141,10 @@
                         const data = JSON.parse(e.data);
                         if (data.header == 'header'){
                           if (data.name == 'connect'){
-                            document.querySelector('#participantsList').value += '\n' + data.message
+                            document.querySelector('#participantsList').value = data.message
                           }
                           else{
-                            document.querySelector('#participantsList').value = document.querySelector('#participantsList').value.replace(data.message, "")
+                            document.querySelector('#participantsList').value = data.message
 
                           }
 

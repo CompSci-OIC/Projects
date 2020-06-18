@@ -125,18 +125,9 @@ def room(request, room_id):
     # render
     userString = ""
     group = CustomGroup.objects.get(id = room_id)
-    newList = group.get_users()
-    anotherList = []
-    print(newList)
-    if newList != ['']:
-        for id in newList:
-            anotherList.append(CustomUser.objects.get(id = int(id)).name + "#" + str(id))
-
-    json_list = json.dumps(anotherList)
     return render(request, 'chat/room.html', {
         'room_id': group.id,
         'room_name': group.group_name,
-        'Participants': json_list,
         'user_id': request.session['userId'],
         'user_name': CustomUser.objects.get(id = request.session['userId']).name
     })

@@ -12,6 +12,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         self.room_group_name = 'chat_%s' % self.room_name
         self.group = CustomGroup.objects.get(id = int(self.room_name))
+
+        newList = self.group.get_users()
+        anotherList = []
+        if newList != ['']:
+            for id in newList:
+                anotherList.append(CustomUser.objects.get(id = int(id)).name + "#" + str(id))
+        self.participantsList = anotherList
+
         # Join room group
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -24,6 +32,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         # Leave room group
         self.group.delete_user(self.user_id)
         self.group.save()
+        newList = self.group.get_users()
+        anotherList = []
+        if newList != ['']:
+            for id in newList:
+                anotherList.append(CustomUser.objects.get(id = int(id)).name + "#" + str(id))
+        self.participantsList = anotherList
+
         await self.channel_layer.group_discard(
             self.room_group_name,
             self.channel_name
@@ -33,7 +48,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             {
                 'type': 'chat_message',
                 'header': 'header',
-                'message': self.user.name + "#" + str(self.user_id),
+                'message': '\n'.join(self.participantsList),
                 'name': "disconnect"
             }
         )
@@ -61,6 +76,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.user_id = int(message)
             self.user = CustomUser.objects.get(id = int(self.user_id))
             self.group.add_user(self.user_id)
+            newList = self.group.get_users()
+            anotherList = []
+            if newList != ['']:
+                for id in newList:
+                    anotherList.append(CustomUser.objects.get(id = int(id)).name + "#" + str(id))
+            self.participantsList = anotherList
             self.group.save()
             print("lalala",self.user_id)
             await self.channel_layer.group_send(
@@ -68,7 +89,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 {
                     'type': 'chat_message',
                     'header': 'header',
-                    'message': self.user.name + "#"+str(self.user_id),
+                    'message': '\n'.join(self.participantsList),
                     'name': "connect"
                 }
             )
