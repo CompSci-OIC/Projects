@@ -16,6 +16,7 @@ def index(request):
             user = CustomUser(name = name)
             user.save()
             request.session['userId'] = user.id
+
             return redirect('group_selection')
     if request.method == 'GET':
         if 'userId' in request.session:
@@ -46,11 +47,13 @@ def group_selection(request):#!!!!
         if request.session['errorFlag'] == 1:
             request.session['errorFlag'] = 0
             errorFlag = 1
-    print(request.session['userId'])
 
 
     form = JoinGroupForm()
     if not('userId' in request.session):
+        return redirect('index')
+    if not CustomUser.objects.filter(id = int(request.session['userId'])).exists():
+        request.session.flush()
         return redirect('index')
 
     if request.method == 'POST':
@@ -90,6 +93,11 @@ def create_group(request):
 
     if not('userId' in request.session):
         return redirect('index')
+
+    if not CustomUser.objects.filter(id = int(request.session['userId'])).exists():
+        request.session.flush()
+        return redirect('index')
+
     if request.method == 'POST':
         form = GroupForm(request.POST)
         if form.is_valid():
@@ -119,8 +127,25 @@ def not_found(request):
     pass
 
 def room(request, room_id):
+
     if not('userId' in request.session):
         return redirect('index')
+    if not CustomUser.objects.filter(id = int(request.session['userId'])).exists():
+        request.session.flush()
+        return redirect('index')
+
+    groupId = room_id
+
+    if groupId.isnumeric():
+        if CustomGroup.objects.filter(id = int(groupId)).exists():
+            group = CustomGroup.objects.get(id = int(groupId))
+            group.save()
+        else:
+
+            return redirect('index')
+    else:
+        return redirect('index')
+
     # check if session started go to create_name page in case not
     # check if group exists, if not group selection screen
     # check if user is in the group if not add him
