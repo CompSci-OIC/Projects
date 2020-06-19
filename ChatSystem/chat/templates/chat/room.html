@@ -131,12 +131,6 @@
                       chatSocket.send(headerMsg)
                     }
 
-
-
-
-
-
-
                     chatSocket.onmessage = function(e) {
                         const data = JSON.parse(e.data);
                         if (data.header == 'header'){
