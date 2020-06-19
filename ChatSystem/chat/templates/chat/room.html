@@ -130,7 +130,7 @@
 
                     chatSocket.onopen = function(e){
                       chatSocket.send(headerMsg)
-                      document.querySelector('#participantsList').style.color="green";
+                      //document.querySelector('#participantsList').style.color="green";
                     }
 
                     chatSocket.onmessage = function(e) {
@@ -149,9 +149,11 @@
                             document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
                             var textarea = document.getElementById('chat-log');
                             textarea.scrollTop = textarea.scrollHeight;
+                            /*
                             if (name == data.name){
                                 document.querySelector('#chat-log').style.color="green";
                             }
+                            */
                         }
                     };
 
