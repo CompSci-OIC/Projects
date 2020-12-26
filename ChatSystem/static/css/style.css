@@ -1,0 +1,371 @@
+*:focus {outline:none !important} /*disable html element highlight*/
+
+header{
+    display: flex;
+    align-items: center;
+    height: 70px;
+    text-align: left;
+    font-size: 23px;
+    color: black;
+}
+
+#mode{
+    padding-top: 13px;
+    padding-bottom: 0px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    margin-left: 51.5%;    /*so that "Chat Room" header donesn't split when page is scaled*/
+}
+
+.item{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#darkMode{
+    padding: 4px;
+}
+
+#lightMode{
+    padding: 4px;
+}
+
+.switch{
+    position: relative;
+    display: inline-block;
+    top: 5px;
+    left: 1px;
+    width:  45px;
+    height: 20px;
+    border: 1px solid #CCC;
+    border-radius: 20px;
+
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #CCC;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    right: 2px;
+    bottom: 1px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #161616;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #CCC;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(23px);
+    -ms-transform: translateX(23px);
+    transform: translateX(23px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 20px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+body{
+    overflow: hidden;
+    position: relative;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    height: 100%;
+    width: 100%;
+    font-family: "Georgia";
+    padding-right: 17px;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+#chat-log{
+    color: #000000;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #FFFFFF;
+    border: 2px solid black;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    display:block;/*reset from inline*/
+    width: 1203px;
+    height: 742px;
+    margin:0;/*remove defaults*/
+    font-family: 'Georgia';
+    font-size: 20px;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+footer{
+    clear: both;
+    position: relative;
+    display: inline-block;
+
+}
+
+#chat-message-input{
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    padding-left: 7px;
+    border-radius: 13px;
+    border: 2px solid black;
+    width: 1120px;
+    height: 41px;
+}
+
+.sendButtonBlack{
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    border-radius: 50%;
+    border: 1;
+    height: 53px;
+    width: 53px;
+    margin-left: 23%;
+    background: url("../image/blackPaperplane.png");
+}
+
+.sendButtonWhite{
+    display: inline-block;
+    position: relative;
+    font-size: 20px;
+    border-radius: 50%;
+    border: 1;
+    border-color: white;
+    height: 53px;
+    width: 53px;
+    margin-left: 23%;
+    background: url("../image/whitePaperplane.png");
+}
+
+.container{
+    display: flex;
+    font-family: "Georgia";
+    width: 100%;
+}
+
+.info-area{
+    padding-left: 2%;
+    flex: 25%;
+    margin: 0;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    display:block;/*reset from inline*/
+}
+
+
+.button-else{
+    flex: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 14px;
+    height: 836px;
+    border: 2px;
+}
+
+.userList{
+    flex: 90%;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+#groupID{
+    flex: 10%;
+    margin-bottom: 0;
+}
+
+.theButton{
+    flex: 10%;
+    height: 46px;
+    border: 2px;
+
+}
+
+#leaveGroupButt{
+    font-size: 24px;
+    background-color: white;
+    border-radius: 15px;
+    border: 1;
+    height: 39px;
+    width: 95%;
+    margin-left: 13px;
+    margin-top: 5px;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.buttAnimation:hover{
+    filter: invert(100%);
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.chat-area{
+    flex: 75%;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+#participantsList{
+    position: relative;
+    background-color: white;
+    color: black;
+    border: 0;
+    font-size: 22px;
+    width: 100%;
+    height: 100%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+
+}
+
+
+.setup /* Layout for all setup pages (index, select, createGroup)*/
+{
+    font-family: "Georgia";
+    display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;     /* center items horizontally, in this case */
+    height: 800px;
+    text-align: center;
+    margin: 5px;
+
+}
+
+#errorBody{
+    color: white;
+    background: url("../image/spaceDark.png");
+}
+
+#nameDisplay
+{
+    font-size: x-large;
+    position: absolute;
+    top: 0%;
+    right: 0%; /*Will make the name tag sit on the right*/
+    margin-right: 5%;
+}
+
+#backButton
+{
+    width: fit-content;
+    height: fit-content;
+    font-size: x-large;
+    position: absolute;
+    top: 2.5%;
+    left: 0;
+    margin-left: 2%;
+    border-radius: 15px;
+    border: 1;
+}
+
+#namesetupHeading
+{
+     font-size: xx-large;
+     text-align: center;
+}
+
+#nameForm
+{
+    height: 33px;
+    width: 512px;
+    font-size: x-large;
+    padding: 5px;
+    border-radius: 13px;
+    border: 2px solid black;
+}
+
+#nameButton
+{
+    margin-left: 10px;
+    width: fit-content;
+    height: fit-content;
+    font-size: x-large;
+    border-radius: 15px;
+    border: 1;
+}
+
+#groupsetupHeading
+{
+    font-size: x-large;
+    text-align: left;
+    margin-left: 20px;
+}
+
+#groupsetupForm
+{
+    margin-left: 20px;
+    height: 36px;
+    width: 256px;
+    font-size: x-large;
+    padding: 5px;
+    border-radius: 13px;
+    border: 2px solid black;
+}
+
+#groupsetupButton
+{
+    margin-left: -1px;
+    width: fit-content;
+    height: fit-content;
+    font-size: x-large;
+    border-radius: 15px;
+    border: 1;
+}

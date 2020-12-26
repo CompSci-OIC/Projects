@@ -1,0 +1,194 @@
+<!-- chat/templates/chat/room.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Chat Room</title>
+        <link rel="stylesheet" type="text/css"  href="../../../static/css/style.css">
+        <!--
+        <link rel="stylesheet" href="../../../static/css/emojionearea.css">
+        <script
+        src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous">
+        </script>
+        <script src="../../../static/js/emojionearea.js"></script>
+        -->
+    </head>
+    <body id="pageBody">
+        <div class="container">
+            <div class="info-area">
+                <div class="sub-container">
+                    <div class="button-else">
+                        <header id="head1"><h1>Participants</h1></header>
+
+                        <div class="userList">
+                            <textarea disabled style="resize:none;" id=participantsList></textarea>
+
+                        </div>
+
+                        <div id="groupID"><h2>group ID: {{room_id}}</h2></div>
+                    </div>
+                    <div class="theButton">
+                        <form action="../../select">
+                            <input type = "submit" class="buttAnimation" id = "leaveGroupButt" value="Leave Group">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-area">
+                <header id="head2">
+                    <h1 style="display:inline;">{{room_name}}</h1>
+                    <div id="mode">
+                        <div class="item"><h3 id="lightMode" style="display:inline;">Light</h3></div>
+                        <div class="item">
+                            <label class="switch">
+                                <input type="checkbox" id="checkBox" onchange="toggleCheck();changeSendButt()">
+                                <span class="slider round"></span>
+                            </label>
+                            <script>
+                            function toggleCheck() {
+                                document.getElementById("sendButton").classList.toggle("sendButtonWhite")
+                                if(document.getElementById("checkBox").checked){    //
+                                    document.getElementById("groupID").style.color="white";
+                                    document.getElementById("leaveGroupButt").style.backgroundColor="#090909";
+                                    document.getElementById("leaveGroupButt").style.color="white";
+                                    document.getElementById("chat-log").style.borderColor="#FFFFFF";
+                                    document.getElementById("chat-log").style.color="#FFFFFF";
+                                    document.getElementById("chat-log").style.backgroundColor="#000000";
+                                    document.getElementById("pageBody").style.backgroundColor="#090909";
+                                    document.getElementById("pageBody").style.color="white";
+                                    document.getElementById("head1").style.color="white";
+                                    document.getElementById("head2").style.color="white";
+                                    document.getElementById("participantsList").style.color="white";
+                                    document.getElementById("participantsList").style.backgroundColor="#090909";
+
+                                }
+                                else{
+                                    document.getElementById("groupID").style.color="black";
+                                    document.getElementById("chat-log").style.backgroundColor="#FFFFFF";
+                                    document.getElementById("chat-log").style.borderColor="black";
+                                    document.getElementById("chat-log").style.color="#000000";
+                                    document.getElementById("pageBody").style.backgroundColor="white";
+                                    document.getElementById("leaveGroupButt").style.color="black";
+                                    document.getElementById("leaveGroupButt").style.backgroundColor="white";
+                                    document.getElementById("pageBody").style.color="black";
+                                    document.getElementById("head1").style.color="black";
+                                    document.getElementById("head2").style.color="black";
+                                    document.getElementById("participantsList").style.color="black";
+                                    document.getElementById("participantsList").style.backgroundColor="white";
+
+                                }
+                            }
+
+                            </script>
+                        </div>
+                        <div class="item"><h3 id="darkMode" style="display:inline;">Dark</h3></div>
+
+                    </div>
+                </header>
+                <div>
+                    <textarea disabled id="chat-log" cols="100" rows="20"></textarea><br>
+
+                </div>
+                <footer>
+                    <div class="item">
+                        <input id="chat-message-input" type="text" placeholder="Type here" color="gray">
+                        <!--
+                        <script>
+                            $(document).ready(function(){
+                                $("#chat-message-input").emojioneArea({
+                                    pickerPosition: "bottom"
+                                });
+                            })
+                        </script>
+                        -->
+                    </div>
+
+                    <div class="item">
+                        <input id="sendButton" class="sendButtonBlack" type="button">
+                    </div>
+                </footer>
+                {{ room_id|json_script:"room-id"}}
+                <script>
+                    const name = "{{user_name}}#{{user_id}}";
+                    const roomId = JSON.parse(document.getElementById('room-id').textContent);
+                    const chatSocket = new WebSocket(
+                        'ws://'
+                        + window.location.host
+                        + '/ws/chat/'
+                        + roomId
+                        + '/'
+                    );
+
+                    const headerMsg = JSON.stringify({
+                        'header': "header",
+                        'message': "{{user_id}}",
+                        'name': "{{user_name}}"
+                    });
+
+                    chatSocket.onopen = function(e){
+                      chatSocket.send(headerMsg)
+                      //document.querySelector('#participantsList').style.color="green";
+                    }
+
+                    chatSocket.onmessage = function(e) {
+                        const data = JSON.parse(e.data);
+                        if (data.header == 'header'){
+                          if (data.name == 'connect'){
+                            document.querySelector('#participantsList').value = data.message;
+                          }
+                          else{
+                            document.querySelector('#participantsList').value = data.message;
+
+                          }
+
+                        }
+                        else{
+                            document.querySelector('#chat-log').value += (data.name + ": "+data.message + '\n');// the message is appended
+                            var textarea = document.getElementById('chat-log');
+                            textarea.scrollTop = textarea.scrollHeight;
+                            /*
+                            if (name == data.name){
+                                document.querySelector('#chat-log').style.color="green";
+                            }
+                            */
+                        }
+                    };
+
+                    chatSocket.onclose = function(e) {
+                        console.error('Chat socket closed unexpectedly');
+                    };
+
+                    document.querySelector('#chat-message-input').focus();
+                    document.querySelector('#chat-message-input').onkeyup = function(e) {
+                        if (e.keyCode === 13) {  // enter, return
+                            document.querySelector('#sendButton').click();
+                        }
+                    };
+
+                    document.querySelector('#sendButton').onclick = function(e) {
+                        const messageInputDom = document.querySelector('#chat-message-input');
+                        const message = messageInputDom.value;
+                        const msg = JSON.stringify({
+                            'header': "normal",
+                            'message': message,
+                            'name': name
+                        });
+                        chatSocket.send(msg);
+                        messageInputDom.value = '';
+                    };
+                    document.querySelector('#leaveGroupButt').onclick = function(e) {
+                        return 0;
+                    };
+                </script>
+                <!--
+                <footer>
+                    <h4>By OIC CompSci Gang &copy</h4>
+                </footer>
+                -->
+            </div>
+        </div>
+    </body>
+</html>

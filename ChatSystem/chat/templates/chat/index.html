@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Web chat application - Name selection</title>
+        <link rel="stylesheet" type="text/css" href="../../../static/css/style.css">
+    </head>
+
+    <body class = "setup">
+        <div class = heading id = "namesetupHeading">
+            <h1>Choose your name</h1>
+        </div>
+        <div class = form>
+            <center>
+            <form method = "post">
+                {% csrf_token %}
+                {{ nameForm }}
+                <input class="buttAnimation" id = "nameButton" type = "submit" value = "Enter">
+            </form>
+            </center>
+        </div>
+    </body>
+
+    <script>
+
+    </script>
+
+</html>

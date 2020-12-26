@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+    <head>
+        <title>Web chat application - Create group</title>
+        <link rel="stylesheet" type="text/css"  href="../../../static/css/style.css">
+    </head>
+
+    <body class = "setup">
+
+        <div>
+            <form action = "../select">
+                <input type = "submit" class="buttAnimation" id = "backButton" value = "Go back">
+            </form>
+            <p id = "nameDisplay">
+                <u>Name:</u> {{username}}
+            </p>
+        </div>
+
+        <div id = "groupsetupHeading" style="text-align: center;">
+        <form  method ="post" >
+            <h1 style="display: inline; margin: 0;"> Group name:
+            {% csrf_token %}
+            {{ groupForm }}
+            </h1>
+        </div>
+
+        <div class = heading id = "groupsetupHeading" style="margin-top: 100px;">
+            <h1>Group ID: {{group_id}}
+            </h1>
+        </div>
+            <input type = "submit" class="buttAnimation" id = "groupsetupButton" style = "margin-left: 20px;" value="Create"></button>
+        </form>
+    </body>
+
+</html>
