@@ -38,9 +38,11 @@ We have also implemented the ability for user to define specific bytes at the be
 
 The syntax is as follows:
 
-<DB> followed by \n character
-then \n separated <byte address>:<byte value>
-\n character and a terminator </DB>
+```<DB>``` followed by ```\n``` character
+
+then ```\n``` separated ```<byte address>:<byte value>```
+
+```\n``` character and a terminator ```</DB>```
 
 it should look like that:
 ```
