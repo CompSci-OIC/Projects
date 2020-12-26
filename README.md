@@ -2,7 +2,7 @@
 All projects ever made by students of OIC.
 
 # CIE Assembler
-![view]()
+![view](https://github.com/CompSci-OIC/Projects/blob/master/CIE_Assembler/images/view.gif?raw=true)
 There was no way to run a made up assembly code from CIE Computer Science A-Levels so we decided to make a virtual machine that could interpret this specific assembly language. It can show how RAM and relevant registers are changing in real time.
 Developers:
 * Adi Bozzhanov
