@@ -28,3 +28,25 @@ run ```python src/main.py``` or ```python3 src/main.py```
 Now have fun playing around with the CIE Assembler virtual machine!
 
 ## Specification
+Here is the specification image:
+
+![spec](https://github.com/CompSci-OIC/Projects/blob/master/CIE_Assembler/images/spec.png?raw=true)
+
+We have implemented all of the listed commands.
+
+We have also implemented the ability for user to define specific bytes at the beginning of the program.
+
+The syntax is as follows:
+
+<DB> followed by \n character
+then \n separated <byte address>:<byte value>
+\n character and a terminator </DB>
+
+it should look like that:
+```
+<DB>
+16:72
+17:69
+...
+</DB>
+```
